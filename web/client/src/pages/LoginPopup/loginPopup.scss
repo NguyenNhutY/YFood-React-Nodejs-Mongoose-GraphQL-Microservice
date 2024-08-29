@@ -1,0 +1,155 @@
+.login-popup {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+}
+
+.login-popup-container {
+  place-self: center;
+  width: max(23vw, 380px);
+  color: #808080;
+  background-color: white;
+  flex-direction: column;
+  display: flex;
+  padding: 25px 30px;
+  border-radius: 15px;
+  font-size: 14px;
+  animation: fadeIn 0.5s;
+}
+h2 {
+  color: tomato;
+  font-weight: bold;
+  margin: 0 auto;
+  text-align: center;
+
+  font-size: 32px;
+}
+label:not(.label-terms, .lagel-img) {
+  color: tomato;
+  font-weight: bold;
+}
+.login-popup-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: Black;
+}
+
+.login-popup-title img {
+  width: 16px;
+  cursor: pointer;
+}
+
+.login-popup-inputs {
+  display: Flex;
+  flex-direction: column;
+}
+
+.login-popup-inputs input {
+  outline: none;
+  border: 1px solid #c9c9c9;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.login-popup-inputs input:hover {
+  transition: 0.3s;
+  box-shadow: 0 0 5px tomato;
+  transform: translateY(-1px);
+}
+
+.login-popup-container button:not(.btn-intro-login) {
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  background-color: tomato;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.btn-intro-login {
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  width: 55px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.login-popup-container button:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+  transform: translateY(-1px);
+}
+
+.login-popup-condition {
+  display: flex;
+
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.login-popup p span {
+  color: tomato;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-popup p span:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+  transform: translateY(-1px);
+}
+
+.btn-pass-generator {
+  color: tomato;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.btn-pass-generator:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+  transform: translateY(-1px);
+}
+.label-terms {
+  color: black;
+  display: inline; /* Đảm bảo label không xuống dòng */
+}
+
+.span-terms {
+  color: tomato;
+  cursor: pointer;
+  display: inline; /* Đảm bảo span không xuống dòng */
+}
+
+.span-terms:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+  transform: translateY(-1px);
+}
+.form-login-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  align-items: center;
+}
+
+.container-terms {
+  margin-top: 10px;
+}
+
+.password-criteria {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép phần tử bao quanh các dòng */
+  gap: 10px; /* Khoảng cách giữa các phần tử */
+}
+.password-criteria > div {
+  flex: 1 1 calc(50% - 10px); /* Đảm bảo mỗi phần tử chiếm một nửa chiều rộng cộng với khoảng cách */
+  box-sizing: border-box; /* Đảm bảo padding và border không làm thay đổi kích thước phần tử */
+  font-size: 12px;
+}

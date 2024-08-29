@@ -1,0 +1,58 @@
+.toggle-btn {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+  font-size: 50px;
+  border-radius: 50%;
+  transition: background 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  border: none; /* Đã sửa lại để không có border */
+  cursor: pointer;
+  background-color: white; /* Thêm màu nền mặc định */
+  padding: 5px;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.8); /* Thay đổi hiệu ứng khi hover */
+}
+
+.toggle-btn:active {
+  background: var(--gradient-text-o);
+  transition: background 0.3s, color 0.3s;
+}
+
+.chatbot-widget {
+  position: fixed; /* Thay đổi thành fixed nếu bạn muốn nó luôn ở một vị trí cố định */
+  bottom: 120px; /* Điều chỉnh khoảng cách từ dưới */
+  right: 100px; /* Điều chỉnh khoảng cách từ phải */
+  z-index: 10; /* Đảm bảo chatbot nằm trên các phần tử khác */
+  width: 280px; /* Điều chỉnh kích thước của chatbot */
+}
+
+@media screen and (max-width: 550px) {
+  .toggle-btn {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    font-size: 30px; /* Điều chỉnh kích thước chữ cho phù hợp */
+    right: 30px;
+  }
+}
+.chatbot-container .img-chatbot {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.chatbot-container .img-chatbot:hover {
+  opacity: 0.5;
+}
+
+.chatbot-container .img-chatbot:active {
+  opacity: 1;
+  transition: opacity 0.5s;
+}

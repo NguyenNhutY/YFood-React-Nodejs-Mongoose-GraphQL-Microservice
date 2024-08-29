@@ -1,0 +1,116 @@
+.blog-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
+  h2 {
+    margin: 0 auto 16px auto;
+    font-size: 24px;
+    color: tomato;
+  }
+
+  div {
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: tomato;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  textarea {
+    height: 150px;
+    resize: vertical;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  button:active {
+    background-color: darkred;
+    color: white;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .success-message {
+    color: green;
+  }
+
+  .btn-submit-blog {
+    background-color: tomato;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0 auto;
+  }
+
+  .forbidden-words-list {
+    margin-top: 16px;
+
+    .forbidden-word {
+      color: #721c24;
+      background-color: #f8d7da;
+      padding: 2px 4px;
+      margin-right: 4px;
+      border-radius: 4px;
+    }
+  }
+
+  .image-preview {
+    position: relative;
+    margin-top: 16px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .btn-remove-image {
+      position: absolute;
+      top: 5px;
+      right: 170px;
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 5px;
+
+      img {
+        width: 15px;
+        height: 15px;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.8);
+        transition: background 0.3s;
+        transform: scale(1.1);
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+// job.scss
+
+.job-detail {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: color 0.3s ease;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: tomato;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+      color: #555;
+
+      &:last-child {
+        border-bottom: none;
+      }
+      &:first-child {
+        color: tomato;
+        font-size: 32px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .application-success {
+    display: inline-block;
+    padding: 12px 24px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    background: #d4edda;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #155724;
+      color: #fff;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+/* src/components/CommentList.css */
+.comment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.comment-list li {
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 0;
+}

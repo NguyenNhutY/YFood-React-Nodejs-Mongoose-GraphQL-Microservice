@@ -1,0 +1,108 @@
+// navbarToggle.scss00
+.active {
+  padding-bottom: 2px;
+  border-bottom: 2px solid #49257e;
+}
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  color: #49557e;
+  font-size: 18px;
+  z-index: 1;
+  cursor: pointer;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  // Định dạng liên kết
+  a {
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 10px 0;
+
+    &:hover {
+      color: tomato;
+    }
+    &:active {
+      text-decoration: underline;
+      transition: color 0.3s ease-in-out;
+    }
+  }
+
+  // Định dạng các mục menu
+  li {
+    &:hover {
+      color: #49257e;
+      text-decoration: underline;
+      transition: 0.3s;
+      border-radius: 15%;
+      opacity: 0.7;
+    }
+  }
+
+  // Hiệu ứng mở menu
+  &.open {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  // Đặt menu nằm ngang
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    max-height: none;
+    opacity: 1;
+  }
+
+  // Đặt menu theo chiều dọc khi màn hình nhỏ
+  @media (max-width: 767px) {
+    flex-direction: column;
+    max-height: 0;
+    opacity: 0;
+    align-items: center;
+    width: 100%;
+
+    &.open {
+      max-height: 500px;
+      opacity: 1;
+    }
+  }
+}
+
+// Kích hoạt mục menu
+.menu-item {
+  position: relative;
+
+  &.active {
+    border-bottom: 2px solid black;
+  }
+}
+
+// Định dạng hình ảnh trong menu
+.navbar-menu img {
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  margin: 0 30px;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+// Hiệu ứng hover và active cho menu-toggle
+.menu-toggle {
+  &:hover {
+    background-color: #fff4f2;
+    transform: scale(1.1);
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  &:active {
+    color: #fff4f2;
+    transform: scale(1);
+  }
+}

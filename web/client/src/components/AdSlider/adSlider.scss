@@ -1,0 +1,56 @@
+/* adSlider.scss */
+
+/* Wrapper container for the entire slider */
+.ad-slider {
+  background-color: #f9f9f9; // Light background color
+  text-align: center;
+  height: 25%;
+  width: auto;
+  margin: 0 auto 60px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 50px;
+}
+
+.ad-slider-list {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.5s ease;
+  margin: 0;
+}
+
+.ad-slider-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.ad-slider-list-item .ad-slider-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ad-slider {
+  .swiper-pagination-bullets {
+    bottom: 10px;
+  }
+
+  .swiper-pagination-bullet {
+    background: #000;
+    opacity: 0.7;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #ff0000; // Highlight color for active bullet
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #ff0000; // Navigation arrow color
+  }
+}

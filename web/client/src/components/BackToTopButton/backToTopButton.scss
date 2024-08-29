@@ -1,0 +1,45 @@
+.backtotopbutton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+  font-size: 50px;
+  background: var(--gradient-text-o);
+  border-radius: 50%;
+  transition: background 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  border: white;
+  cursor: pointer;
+}
+
+.backtotopbutton:hover {
+  background: rgba(255, 255, 255, 0);
+}
+.fontawe {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+}
+.fontawe:hover {
+  color: var(--gradient-text-o);
+}
+
+@media screen and (max-width: 550px) {
+  .backtotopbutton {
+    width: 30px;
+    height: 30px;
+    right: 30px;
+    bottom: 30px;
+  }
+  .fontawe {
+    width: 20px;
+    height: 20px;
+  }
+}

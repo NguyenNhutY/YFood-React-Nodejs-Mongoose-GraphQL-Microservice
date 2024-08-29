@@ -1,0 +1,16 @@
+.intro-tour-button {
+  border-radius: 4px; /* Bo góc */
+  padding: 5px 10px; /* Khoảng cách bên trong */
+  font-size: 16px; /* Kích thước chữ */
+  cursor: pointer; /* Con trỏ chuột */
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Hiệu ứng đèn ánh xen kẽ */
+  border-radius: 10px;
+  border: 1px solid black; /* Đường viền */
+}
+
+.intro-tour-button:hover {
+  opacity: 0.8; /* Nếu hover, đ� m� của nút */
+}
+
+/* Vị trí cho Navbar */

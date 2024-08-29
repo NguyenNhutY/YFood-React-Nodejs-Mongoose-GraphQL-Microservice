@@ -1,0 +1,13 @@
+.input-login {
+  outline: none;
+  border: 1px solid #c9c9c9;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.input-login:hover {
+  transition: 0.3s;
+  box-shadow: 0 0 5px tomato;
+  transform: translateY(-1px);
+}

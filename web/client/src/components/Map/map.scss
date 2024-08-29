@@ -1,0 +1,26 @@
+/* map.scss */
+/* map.scss */
+.img-map {
+  position: relative;
+  height: 0;
+  padding-bottom: 50%; /* Tỷ lệ khung hình 16:9 (có thể thay đổi theo nhu cầu) */
+  overflow: hidden;
+
+  /* Đảm bảo rằng bản đồ chiếm toàn bộ chiều rộng và chiều cao của khung chứa */
+  .leaflet-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Trong file CSS toàn cục của bạn */
+
+/* map.scss */
+@media (max-width: 768px) {
+  .img-map {
+    padding-bottom: 75%; /* Thay đổi tỷ lệ cho màn hình nhỏ hơn */
+  }
+}

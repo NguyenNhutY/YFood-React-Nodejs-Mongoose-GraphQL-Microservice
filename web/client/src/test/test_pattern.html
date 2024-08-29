@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const LOGICAL_NUMBER_FACEBOOK = "FB";
+      const LOGICAL_NUMBER_GOOGLE = "GOOGLE";
+      const LOGICAL_NUMBER_LOGINDEFAULT = "LOGINDEFAULT";
+
+      class Strategy {
+        login() {
+          console.log("must defin login");
+        }
+      }
+
+      class FB extends Strategy {
+        login() {
+          console.log("Login fb");
+        }
+      }
+
+      class FactoryFB {
+        constructor(user, password) {
+          this.user = user;
+          this.password = 123;
+        }
+        create() {
+          return new FB();
+        }
+      }
+
+      class Microsoft extends Strategy {
+        login() {
+          console.log("Login fb");
+        }
+      }
+
+      class FactoryMicrosoft {
+        create() {
+          return new FB();
+        }
+      }
+
+      class Google extends Strategy {
+        login() {
+          console.log("Login google");
+        }
+      }
+
+      class FactoryGoole {
+        create() {
+          return new Google();
+        }
+      }
+
+      class AccDefault extends Strategy {
+        login() {
+          console.log("Login accDefault");
+        }
+      }
+      class FactoryAccDefault {
+        create() {
+          return new AccDefault();
+        }
+      }
+      const factoryFB = new FactoryFB();
+      const factoryGoole = new FactoryGoole();
+      const factoryDefaultAcount = new FactoryAccDefault();
+
+      const ObjetLogin = {
+        factoryFB,
+        factoryGoole,
+        factoryDefaultAcount,
+      };
+    </script>
+
+    <script>
+      class StrategyManagerLoginPage {
+        construtor() {
+          this._strategy = null;
+        }
+        set strategy(strategy) {
+          this._strategy = strategy;
+          sessionStorage;
+        }
+        get strategy() {
+          return this._strategy;
+        }
+        login() {
+          this._strategy.login();
+        }
+      }
+
+      const strategyManagerLoginPage = new StrategyManagerLoginPage();
+      strategyManagerLoginPage._strategy = ObjetLogin.factoryFB.create();
+      strategyManagerLoginPage.login();
+    </script>
+  </body>
+</html>

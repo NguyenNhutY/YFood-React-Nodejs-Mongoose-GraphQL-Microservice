@@ -1,0 +1,230 @@
+.comment-section {
+  margin: 80px auto 0 auto;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-width: 600px;
+
+  h2 {
+    font-size: 1.5rem;
+    color: tomato;
+    margin-bottom: 10px;
+  }
+
+  .comments-list {
+    margin-bottom: 20px;
+
+    .comment {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+
+      // Optional: Add some margin to the bottom of each comment
+      margin-bottom: 10px;
+    }
+  }
+
+  .add-comment {
+    margin-top: 20px;
+
+    label {
+      color: tomato;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      resize: vertical;
+
+      // Optional: Add some box-shadow for a better visual effect
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: tomato;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 20px;
+
+      // Optional: Add hover effect for the button
+      &:hover {
+        background-color: darkred;
+      }
+    }
+  }
+  &:hover {
+    transition: background-color 0.3s ease;
+    transition: box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: opacity 0.3s ease;
+    transition: filter 0.3s ease;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    opacity: 0.8;
+  }
+}
+
+.comment-media {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.media-item {
+  margin: 10px;
+}
+
+.file-item {
+  margin: 10px;
+}
+
+.upload-files-cmt {
+  margin-top: 10px;
+}
+.blog-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
+  h2 {
+    margin: 0 auto 16px auto;
+    font-size: 24px;
+    color: tomato;
+  }
+
+  div {
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: tomato;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  textarea {
+    height: 150px;
+    resize: vertical;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+
+  button:active {
+    background-color: darkred;
+    color: white;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .success-message {
+    color: green;
+  }
+
+  .btn-submit-blog {
+    background-color: tomato;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0 auto;
+  }
+
+  .forbidden-words-list {
+    margin-top: 16px;
+
+    .forbidden-word {
+      color: #721c24;
+      background-color: #f8d7da;
+      padding: 2px 4px;
+      margin-right: 4px;
+      border-radius: 4px;
+    }
+  }
+
+  .image-preview {
+    position: relative;
+    margin-top: 16px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .btn-remove-image {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 5px;
+
+      img {
+        width: 15px;
+        height: 15px;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.8);
+        transition: background 0.3s;
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+.comments-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.btn-like {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  span {
+    font-size: 14px;
+  }
+}

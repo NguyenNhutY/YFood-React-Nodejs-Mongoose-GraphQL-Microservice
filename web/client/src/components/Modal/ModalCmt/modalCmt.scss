@@ -1,0 +1,23 @@
+.cmt-container {
+  place-self: center;
+  width: auto;
+  color: #808080;
+  flex-direction: column;
+  display: flex;
+  gap: 25px;
+  padding: 10px 0px;
+  border-radius: 15px;
+  font-size: 13.5px;
+  animation: fadeIn 0.5s;
+}
+
+.cmt-container li {
+  border-radius: 5px;
+  transition: 0.3s;
+  padding: 5px 10px;
+  font-size: 12.5px;
+}
+.cmt-content {
+  margin-top: -30px;
+  margin-bottom: -30px;
+}

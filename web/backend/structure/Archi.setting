@@ -1,0 +1,125 @@
+project-root/
+├── k8s/                                        # Kubernetes configuration files
+│   ├── kafka/                                  # Kafka and Zookeeper configurations
+│   │   ├── zookeeper-statefulset.yaml
+│   │   ├── kafka-statefulset.yaml
+│   │   ├── kafka-service.yaml
+│   ├── webpage-service/                        # WebPage service Kubernetes configurations
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   ├── configmap.yaml
+│   │   ├── secret.yaml
+│   ├── content-service/                        # Content service Kubernetes configurations
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   ├── configmap.yaml
+│   │   ├── secret.yaml
+│   ├── notification-service/                   # Notification service Kubernetes configurations
+│   │   ├── deployment.yaml
+│   │   ├── service.yaml
+│   │   ├── configmap.yaml
+│   │   ├── secret.yaml
+│   ├── monitoring/                             # Monitoring configurations (Prometheus, Grafana)
+│   │   ├── prometheus-deployment.yaml
+│   │   ├── grafana-deployment.yaml
+│   ├── ingress/                                # Ingress configurations for external access
+│   │   ├── ingress.yaml
+│   ├── istio/                                  # Istio Service Mesh configurations
+│   │   ├── istio-config.yaml
+│   ├── secrets/                                # Secrets management configurations
+│   │   ├── db-secret.yaml
+│   ├── logging/                                # Centralized logging configurations (ELK Stack)
+│   │   ├── elasticsearch-deployment.yaml
+│   │   ├── fluentd-configmap.yaml
+│   │   ├── kibana-deployment.yaml
+├── services/                                   # Source code for microservices
+│   ├── webpage-service/
+│   │   ├── src/
+│   │   │   ├── config/                         # Configuration files
+│   │   │   │   ├── database.ts                 # Sequelize and database configuration
+│   │   │   │   ├── kafkaConfig.ts              # Kafka configuration
+│   │   │   ├── controllers/                    # Controllers for handling requests
+│   │   │   │   ├── WebPageController.ts
+│   │   │   ├── models/                         # Sequelize models
+│   │   │   │   ├── WebPage.ts
+│   │   │   │   ├── TextContent.ts
+│   │   │   │   ├── ImageUrl.ts
+│   │   │   │   ├── LinkUrl.ts
+│   │   │   │   ├── MetadataContent.ts
+│   │   │   ├── routes/                         # Express routes
+│   │   │   │   ├── WebPageRoutes.ts
+│   │   │   ├── services/                       # Business logic services
+│   │   │   │   ├── WebPageService.ts
+│   │   │   ├── utils/                          # Utility functions (e.g., logger)
+│   │   │   │   ├── logger.ts
+│   │   │   ├── app.ts                          # Express app configuration
+│   │   │   ├── server.ts                       # Server startup script
+│   │   ├── Dockerfile                          # Dockerfile for building the service
+│   │   ├── tsconfig.json                       # TypeScript configuration
+│   │   ├── package.json                        # Node.js dependencies
+│   │   ├── jest.config.js                      # Configuration for Jest (testing framework)
+│   ├── content-service/
+│   │   ├── src/
+│   │   └── ...                                 # Similar structure to webpage-service
+│   ├── notification-service/
+│   │   ├── src/
+│   │   └── ...                                 # Similar structure to webpage-service
+├── ci-cd/                                      # CI/CD pipeline configurations
+│   ├── Jenkinsfile                             # Jenkins pipeline configuration
+│   ├── gitlab-ci.yml                           # GitLab CI pipeline configuration
+│   ├── github-actions/                         # GitHub Actions configuration
+│   │   ├── deploy.yml
+├── tests/                                      # Integration and end-to-end tests
+│   ├── integration/
+│   │   ├── webpage-service.test.ts
+│   │   ├── content-service.test.ts
+│   └── e2e/
+│       ├── e2e-tests.ts
+├── logs/                                       # Logs directory for local development
+├── .env                                        # Environment variables for local development
+├── docker-compose.yml                          # Docker Compose for local development and testing
+├── README.md                                   # Project documentation
+
+
+services/webpage-service/
+├── src/
+│   ├── config/                # Cấu hình môi trường, cơ sở dữ liệu, Kafka, etc.
+│   │   ├── database.ts        # Cấu hình và khởi tạo kết nối cơ sở dữ liệu với Sequelize
+│   │   ├── kafkaConfig.ts     # Cấu hình Kafka
+│   │   ├── appConfig.ts       # Cấu hình chung của ứng dụng
+│   ├── controllers/           # Xử lý các yêu cầu HTTP
+│   │   ├── WebPageController.ts
+│   ├── middlewares/           # Các middlewares (e.g., xác thực, logging)
+│   │   ├── authMiddleware.ts
+│   │   ├── errorMiddleware.ts
+│   ├── models/                # Định nghĩa các models (Sequelize)
+│   │   ├── WebPage.ts
+│   │   ├── TextContent.ts
+│   │   ├── ImageUrl.ts
+│   │   ├── LinkUrl.ts
+│   │   ├── MetadataContent.ts
+│   ├── repositories/          # Lớp truy cập dữ liệu (Data Access Layer)
+│   │   ├── WebPageRepository.ts
+│   ├── routes/                # Định nghĩa các routes
+│   │   ├── WebPageRoutes.ts
+│   ├── services/              # Lớp xử lý nghiệp vụ (Business Logic Layer)
+│   │   ├── WebPageService.ts
+│   ├── utils/                 # Các tiện ích chung (Utility functions)
+│   │   ├── logger.ts          # Công cụ ghi log
+│   │   ├── constants.ts       # Các hằng số
+│   ├── tests/                 # Unit tests, integration tests
+│   │   ├── WebPageController.test.ts
+│   ├── migrations/            # Các tệp migration để quản lý thay đổi cơ sở dữ liệu
+│   │   ├── 20230821-create-webpages-table.ts
+│   ├── seeders/               # Các tệp seeder để khởi tạo dữ liệu
+│   │   ├── 20230821-seed-webpages.ts
+│   ├── di/                    # Dependency Injection containers
+│   │   ├── index.ts           # Cấu hình DI container cho toàn bộ dịch vụ
+│   ├── cache/                 # Cache layer để tối ưu hóa hiệu năng
+│   │   ├── RedisCache.ts      # Ví dụ về caching với Redis
+│   ├── app.ts                 # Khởi tạo ứng dụng Express
+│   ├── server.ts              # Khởi động server
+├── Dockerfile                 # Dockerfile để container hóa ứng dụng
+├── package.json               # Dependencies và scripts cho dịch vụ
+├── tsconfig.json              # Cấu hình TypeScript
+└── .env                       # Biến môi trường

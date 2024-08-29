@@ -1,0 +1,242 @@
+[
+  {
+    "supplierId": "supplier1",
+    "materialId": "material001",
+    "materialName": "Gạo Jasmine",
+    "quantity": 1000,
+    "unit": "kg",
+    "location": "Nhà kho A"
+  },
+  {
+    "supplierId": "supplier1",
+    "materialId": "material002",
+    "materialName": "Đường tinh luyện",
+    "quantity": 500,
+    "unit": "kg",
+    "location": "Nhà kho B"
+  },
+  {
+    "supplierId": "supplier1",
+    "materialId": "material003",
+    "materialName": "Bột mì",
+    "quantity": 750,
+    "unit": "kg",
+    "location": "Nhà kho C"
+  },
+  {
+    "supplierId": "supplier1",
+    "materialId": "material004",
+    "materialName": "Muối tinh",
+    "quantity": 300,
+    "unit": "kg",
+    "location": "Nhà kho A"
+  },
+  {
+    "supplierId": "supplier1",
+    "materialId": "material005",
+    "materialName": "Dầu thực vật",
+    "quantity": 200,
+    "unit": "lít",
+    "location": "Nhà kho B"
+  },
+  {
+    "supplierId": "supplier2",
+    "materialId": "material006",
+    "materialName": "Đậu nành",
+    "quantity": 600,
+    "unit": "kg",
+    "location": "Nhà kho D"
+  },
+  {
+    "supplierId": "supplier2",
+    "materialId": "material007",
+    "materialName": "Bột cacao",
+    "quantity": 150,
+    "unit": "kg",
+    "location": "Nhà kho E"
+  },
+  {
+    "supplierId": "supplier2",
+    "materialId": "material008",
+    "materialName": "Bơ thực vật",
+    "quantity": 100,
+    "unit": "kg",
+    "location": "Nhà kho F"
+  },
+  {
+    "supplierId": "supplier2",
+    "materialId": "material009",
+    "materialName": "Mì sợi",
+    "quantity": 800,
+    "unit": "kg",
+    "location": "Nhà kho D"
+  },
+  {
+    "supplierId": "supplier2",
+    "materialId": "material010",
+    "materialName": "Sữa bột",
+    "quantity": 400,
+    "unit": "kg",
+    "location": "Nhà kho E"
+  },
+  {
+    "supplierId": "supplier3",
+    "materialId": "material011",
+    "materialName": "Bột ngô",
+    "quantity": 350,
+    "unit": "kg",
+    "location": "Nhà kho G"
+  },
+  {
+    "supplierId": "supplier3",
+    "materialId": "material012",
+    "materialName": "Bột nghệ",
+    "quantity": 200,
+    "unit": "kg",
+    "location": "Nhà kho H"
+  },
+  {
+    "supplierId": "supplier3",
+    "materialId": "material013",
+    "materialName": "Gia vị ướp thịt",
+    "quantity": 50,
+    "unit": "kg",
+    "location": "Nhà kho I"
+  },
+  {
+    "supplierId": "supplier3",
+    "materialId": "material014",
+    "materialName": "Tinh bột khoai tây",
+    "quantity": 150,
+    "unit": "kg",
+    "location": "Nhà kho G"
+  },
+  {
+    "supplierId": "supplier3",
+    "materialId": "material015",
+    "materialName": "Bột gelatin",
+    "quantity": 75,
+    "unit": "kg",
+    "location": "Nhà kho H"
+  },
+  {
+    "supplierId": "supplier4",
+    "materialId": "material016",
+    "materialName": "Trái cây tươi",
+    "quantity": 250,
+    "unit": "kg",
+    "location": "Nhà kho J"
+  },
+  {
+    "supplierId": "supplier4",
+    "materialId": "material017",
+    "materialName": "Rượu vang",
+    "quantity": 100,
+    "unit": "lít",
+    "location": "Nhà kho K"
+  },
+  {
+    "supplierId": "supplier4",
+    "materialId": "material018",
+    "materialName": "Thịt gà",
+    "quantity": 500,
+    "unit": "kg",
+    "location": "Nhà kho J"
+  },
+  {
+    "supplierId": "supplier4",
+    "materialId": "material019",
+    "materialName": "Cải xanh",
+    "quantity": 300,
+    "unit": "kg",
+    "location": "Nhà kho K"
+  },
+  {
+    "supplierId": "supplier4",
+    "materialId": "material020",
+    "materialName": "Tỏi tươi",
+    "quantity": 100,
+    "unit": "kg",
+    "location": "Nhà kho J"
+  },
+  {
+    "supplierId": "supplier5",
+    "materialId": "material021",
+    "materialName": "Cà chua",
+    "quantity": 400,
+    "unit": "kg",
+    "location": "Nhà kho L"
+  },
+  {
+    "supplierId": "supplier5",
+    "materialId": "material022",
+    "materialName": "Dưa chuột",
+    "quantity": 350,
+    "unit": "kg",
+    "location": "Nhà kho M"
+  },
+  {
+    "supplierId": "supplier5",
+    "materialId": "material023",
+    "materialName": "Ớt chuông",
+    "quantity": 200,
+    "unit": "kg",
+    "location": "Nhà kho L"
+  },
+  {
+    "supplierId": "supplier5",
+    "materialId": "material024",
+    "materialName": "Hành tây",
+    "quantity": 300,
+    "unit": "kg",
+    "location": "Nhà kho N"
+  },
+  {
+    "supplierId": "supplier5",
+    "materialId": "material025",
+    "materialName": "Khoai tây",
+    "quantity": 500,
+    "unit": "kg",
+    "location": "Nhà kho M"
+  },
+  {
+    "supplierId": "supplier6",
+    "materialId": "material026",
+    "materialName": "Cà rốt",
+    "quantity": 600,
+    "unit": "kg",
+    "location": "Nhà kho O"
+  },
+  {
+    "supplierId": "supplier6",
+    "materialId": "material027",
+    "materialName": "Súp lơ",
+    "quantity": 250,
+    "unit": "kg",
+    "location": "Nhà kho P"
+  },
+  {
+    "supplierId": "supplier6",
+    "materialId": "material028",
+    "materialName": "Bắp cải",
+    "quantity": 400,
+    "unit": "kg",
+    "location": "Nhà kho O"
+  },
+  {
+    "supplierId": "supplier6",
+    "materialId": "material029",
+    "materialName": "Rau chân vịt",
+    "quantity": 150,
+    "unit": "kg",
+    "location": "Nhà kho P"
+  },
+  {
+    "supplierId": "supplier6",
+    "materialId": "material030",
+    "materialName": "Măng tây",
+    "quantity": 100,
+    "unit": "kg",
+    "location": "Nhà kho O"
+  }
+]

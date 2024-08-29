@@ -1,0 +1,70 @@
+/* Job List */
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 10px 0;
+  color: black;
+  padding: 1rem;
+}
+
+.job-items {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(5, 1fr); // 5 jobs per row on large screens
+  align-items: start;
+}
+
+.job-item {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.job-item:hover {
+  background: #e8f0fe;
+  transform: scale(1.02);
+}
+
+.job-item h2 {
+  font-size: 1.35rem;
+  color: tomato;
+  margin-bottom: 0.5rem;
+}
+
+.job-item p {
+  color: #666;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .job-items {
+    grid-template-columns: repeat(3, 1fr); // 3 jobs per row on medium screens
+  }
+}
+
+@media (max-width: 768px) {
+  .job-items {
+    grid-template-columns: repeat(2, 1fr); // 2 jobs per row on small screens
+  }
+}
+
+@media (max-width: 480px) {
+  .job-items {
+    grid-template-columns: 1fr; // 1 job per row on very small screens
+  }
+}
+
+@media (max-width: 600px) {
+  .job-list {
+    padding: 0.5rem;
+  }
+}

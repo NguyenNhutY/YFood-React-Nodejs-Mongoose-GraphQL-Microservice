@@ -1,0 +1,72 @@
+.customer-reviews {
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  height: auto;
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    transform: translateY(-5px);
+  }
+  h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: tomato;
+  }
+
+  .review {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .review-rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .star {
+        color: #f39c12; // Màu vàng cho sao
+        margin-right: 2px;
+      }
+    }
+
+    .review-comment {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 10px;
+      line-height: 1.5; // Tăng khoảng cách dòng để dễ đọc hơn
+    }
+
+    .review-media {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+
+      .review-image,
+      .review-video {
+        max-width: auto;
+        max-height: auto;
+        border-radius: 4px;
+        object-fit: cover; // Giữ tỷ lệ hình ảnh/video
+      }
+
+      .review-video {
+        margin-top: 5px;
+        border: 1px solid #ddd; // Đường viền cho video để phân biệt với hình ảnh
+      }
+    }
+  }
+
+  p {
+    text-align: center;
+    color: #777;
+    margin-top: 20px; // Khoảng cách giữa các phần tử
+  }
+}

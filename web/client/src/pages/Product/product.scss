@@ -1,0 +1,172 @@
+.product-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  margin: 0 auto 60px;
+  background-color: #f9f9f9;
+  animation: fadeIn 0.5s;
+  border-radius: 10px;
+  transition: box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  transition: transform 0.3s;
+
+  transition: box-shadow 0.3s;
+  transition: background-color 0.3s;
+  transition: border-color 0.3s;
+  transition: border-radius 0.3s;
+  transition: border-width 0.3s;
+  transition: border-style 0.3s;
+  cursor: pointer;
+  .product-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .product-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .product-description {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .product-price {
+    font-size: 1.5rem;
+    color: #ff5722; // Or any color to highlight the price
+    margin: 10px 0;
+  }
+
+  .product-detail {
+    font-size: 1rem;
+    margin: 10px 0;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .product-meta {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    font-size: 1rem;
+    text-align: center;
+
+    li {
+      margin: 5px 0;
+    }
+  }
+
+  .add-to-cart-btn,
+  .view-cart-btn,
+  .view-details-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #ddd;
+    }
+  }
+
+  .add-to-cart-btn {
+    background-color: tomato;
+    color: #fff;
+
+    &:hover {
+      background-color: darkred;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+  }
+
+  .view-cart-btn {
+    background-color: #2196f3;
+    color: #fff;
+
+    &:hover {
+      background-color: #1e88e5;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+  }
+
+  .view-details-btn {
+    background-color: #f1c40f;
+    color: #fff;
+
+    &:hover {
+      background-color: #f39c12;
+    }
+  }
+
+  .notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+
+    &.error {
+      background-color: #f44336;
+    }
+  }
+
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #000;
+    }
+  }
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+}
+
+.adslider-product {
+  margin-top: 50px;
+}

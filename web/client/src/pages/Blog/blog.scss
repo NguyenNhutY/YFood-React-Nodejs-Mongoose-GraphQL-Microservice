@@ -1,0 +1,39 @@
+/* src/pages/Blog/blog.css */
+
+.blog-container {
+  margin: 0 auto 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+  justify-content: center;
+}
+
+.blog-container h1 {
+  text-align: center;
+  font-size: 36px;
+  color: tomato;
+  margin-bottom: 30px;
+}
+
+.blog-container .blog-form {
+  margin-bottom: 40px;
+}
+
+.blog-container .blog-list {
+  margin-top: 20px;
+}
+
+.search-blog {
+  margin: 10px;
+}
+
+.img-header-blog {
+  height: 31vw;
+  margin: 0 auto 29px auto;
+  background: url("/header_img.png") no-repeat;
+  background-size: contain;
+  position: relative;
+}
+.btn-back-history {
+  display: fixed;
+}

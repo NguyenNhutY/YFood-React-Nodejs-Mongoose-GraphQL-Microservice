@@ -1,0 +1,9 @@
+export { Cart } from "./Cart/Cart";
+export { Home } from "./Home/Home";
+export { Info } from "./Info/Info";
+export { LoginPopup } from "./LoginPopup/LoginPopup";
+export { NotFound } from "./NotFound/NotFound";
+export { PlaeOrder } from "./PlaeOrder/PlaeOrder";
+export { PrivacyPolicy } from "./PrivacyPolicy/PrivacyPolicy";
+export { Thanks } from "./Thanks/Thanks";
+export { Loading } from "./Loading/Loading";

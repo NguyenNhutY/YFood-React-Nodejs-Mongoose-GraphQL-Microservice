@@ -1,0 +1,51 @@
+/* SortByPrice.css */
+.sort-by-price {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-by-price span {
+  font-weight: bold;
+  color: #333;
+  margin-right: 10px;
+  transition: color 0.3s ease-in-out;
+  transition: font-size 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out;
+}
+
+.sort-by-price button {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 90px;
+  height: 35px;
+  font-size: 14px;
+}
+
+.sort-by-price button:active {
+  background-color: tomato;
+  color: white;
+  transform: translateY(1px);
+  transition: transform 0.3s ease;
+  transition: background-color 0.3s ease;
+  transition: box-shadow 0.3s ease;
+  transition: color 0.3s ease;
+  transition: filter 0.3s ease;
+  transform: translateY(0px);
+}
+.sort-by-price button:hover {
+  background-color: #fff;
+  color: tomato;
+  transition: background-color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  transition: filter 0.3s ease-in-out;
+  transform: translateY(-1px);
+}

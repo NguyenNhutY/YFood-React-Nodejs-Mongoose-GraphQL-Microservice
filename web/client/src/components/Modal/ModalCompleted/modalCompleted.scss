@@ -1,0 +1,67 @@
+.completed-overlay {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+  top: 0;
+}
+
+.completed-container {
+  place-self: center;
+  width: max(23vw, 330px);
+  background-color: white;
+  flex-direction: column;
+  display: flex;
+  gap: 25px;
+  padding: 25px 30px;
+  border-radius: 15px;
+  font-size: 13px;
+  align-items: center;
+  justify-content: center;
+}
+
+.completed-button {
+  font-size: 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+  justify-content: space-between;
+  width: 80px;
+  height: 35px;
+  margin: 0px auto;
+}
+
+.ok-btn {
+  background: #009966;
+  color: white;
+}
+
+.ok-btn:hover {
+  color: #007744;
+}
+
+.downl-btn {
+  background: tomato;
+  color: white;
+}
+
+.downl-btn:hover {
+  color: tomato;
+}
+
+.completed-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin: 0px auto;
+}
+
+.completed-button:hover {
+  background-color: #fff4f2;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+  transition: 0.3s;
+}

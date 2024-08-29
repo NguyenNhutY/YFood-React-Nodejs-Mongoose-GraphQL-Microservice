@@ -1,0 +1,276 @@
+.promotion-bar-content {
+  animation: marquee 30s linear infinite;
+  display: flex;
+  justify-content: space-btween;
+  align-items: center;
+  display: flex;
+}
+
+.promotion-bar {
+  color: red;
+  padding: 10px;
+  padding: 10px 0px;
+  background: #ffffff;
+  top: 0;
+  position: fixed;
+  z-index: 3;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s;
+  transition: box-shadow 0.3s;
+  transition: background-color 0.3s;
+  transition: color 0.3s;
+  transition: font-size 0.3s;
+  transition: padding 0.3s;
+  transition: border-radius 0.3s;
+  transition: margin-left 0.3s;
+  transition: width 0.3s;
+  transition: max-width 0.3s;
+  transition: margin-bottom 0.3s;
+  transition: max-height 0.3s;
+  transition: transform 0.3s;
+  transition: letter-spacing 0.3s;
+  transition: text-transform 0.3s;
+  transition: line-height 0.3s;
+  transition: word-spacing 0.3s;
+  transition: background-image 0.3s;
+  transition: background-position 0.3s;
+  transition: background-size 0.3s;
+  transition: background-repeat 0.3s;
+  transition: background-origin 0.3s;
+  transition: background-clip 0.3s;
+  transition: background-attachment 0.3s;
+  transition: background-blend-mode 0.3s;
+  transition: filter 0.3s;
+  transition: isolation 0.3s;
+  transition: opacity-transition 0.3s;
+  transition: will-change 0.3s;
+  transition: transform-origin 0.3s;
+  transition: transform-style 0.3s;
+  transition: transition-delay 0.3s;
+  transition: transition-timing-function 0.3s;
+  transition: transition-property 0.3s;
+  transition: transition-duration 0.3s;
+  transition: transition-group-name 0.3s;
+  transition: transition-fill-mode 0.3s;
+  transition: transition-play-state 0.3s;
+  transition: transition-transform 0.3s;
+  transition: transition-opacity 0.3s;
+  transition: transition-background-color 0.3s;
+  transition: transition-border-color 0.3s;
+  transition: transition-color 0.3s;
+  transition: transition-border-radius 0.3s;
+  transition: transition-border-width 0.3s;
+  transition: transition-font-size 0.3s;
+  transition: transition-height 0.3s;
+  transition: transition-left 0.3s;
+  transition: transition-letter-spacing 0.3s;
+  transition: transition-line-height 0.3s;
+  transition: transition-margin 0.3s;
+  transition: transition-max-height 0.3s;
+  transition: transition-max-width 0.3s;
+  transition: transition-min-height 0.3s;
+  transition: transition-min-width 0.3s;
+  transition: transition-padding 0.3s;
+  transition: transition-right 0.3s;
+  transition: transition-text-align 0.3s;
+  transition: transition-text-decoration 0.3s;
+  transition: transition-text-indent 0.3s;
+  transition: transition-text-overflow 0.3s;
+  transition: transition-text-shadow 0.3s;
+}
+
+.current-time,
+.promotion-period,
+.discount-message {
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+  transition: opacity 0.3s;
+  transition: box-shadow 0.3s;
+  transition: background-color 0.3s;
+  transition: color 0.3s;
+  transition: font-size 0.3s;
+  transition: padding 0.3s;
+  transition: border-radius 0.3s;
+  transition: margin-left 0.3s;
+  transition: width 0.3s;
+  transition: max-width 0.3s;
+  transition: margin-bottom 0.3s;
+  transition: max-height 0.3s;
+  transition: transform 0.3s;
+  transition: letter-spacing 0.3s;
+  transition: text-transform 0.3s;
+  transition: line-height 0.3s;
+  transition: word-spacing 0.3s;
+  transition: background-image 0.3s;
+  transition: background-position 0.3s;
+  transition: background-size 0.3s;
+  transition: background-repeat 0.3s;
+  transition: background-origin 0.3s;
+  transition: background-clip 0.3s;
+  transition: background-attachment 0.3s;
+  transition: background-blend-mode 0.3s;
+  transition: filter 0.3s;
+  transition: isolation 0.3s;
+  transition: opacity-transition 0.3s;
+  transition: will-change 0.3s;
+  transition: transform-origin 0.3s;
+  transition: transform-style 0.3s;
+  transition: transition-delay 0.3s;
+  transition: transition-timing-function 0.3s;
+  transition: transition-property 0.3s;
+  transition: transition-duration 0.3s;
+  transition: transition-group-name 0.3s;
+  transition: transition-fill-mode 0.3s;
+  transition: transition-play-state 0.3s;
+  transition: transition-transform 0.3s;
+  transition: transition-opacity 0.3s;
+  transition: transition-background-color 0.3s;
+  transition: transition-border-color 0.3s;
+  transition: transition-color 0.3s;
+  transition: transition-border-radius 0.3s;
+  transition: transition-border-width 0.3s;
+  transition: transition-font-size 0.3s;
+  transition: transition-height 0.3s;
+  transition: transition-left 0.3s;
+  transition: transition-letter-spacing 0.3s;
+  transition: transition-line-height 0.3s;
+  transition: transition-margin 0.3s;
+  transition: transition-max-height 0.3s;
+  transition: transition-max-width 0.3s;
+  transition: transition-min-height 0.3s;
+  transition: transition-min-width 0.3s;
+  transition: transition-padding 0.3s;
+  transition: transition-right 0.3s;
+  transition: transition-text-align 0.3s;
+  transition: transition-text-decoration 0.3s;
+  transition: transition-text-indent 0.3s;
+  transition: transition-text-overflow 0.3s;
+  transition: transition-text-shadow 0.3s;
+  transition: transition-border-image 0.3s;
+  transition: transition-border-image-outset 0.3s;
+  transition: transition-border-image-repeat 0.3s;
+  transition: transition-border-image-slice 0.3s;
+  transition: transition-border-image-width 0.3s;
+  transition: transition-border-radius-topleft 0.3s;
+  transition: transition-border-radius-topright 0.3s;
+  transition: transition-border-radius-bottomleft 0.3s;
+  transition: transition-border-radius-bottomright 0.3s;
+  transition: transition-clip-path 0.3s;
+  transition: transition-mask 0.3s;
+  transition: transition-object-fit 0.3s;
+  transition: transition-object-position 0.3s;
+  transition: transition-offset-distance 0.3s;
+  transition: transition-offset-path 0.3s;
+  transition: transition-scroll-behavior 0.3s;
+  transition: transition-tab-size 0.3s;
+  transition: transition-text-decoration-color 0.3s;
+  transition: transition-text-emphasis 0.3s;
+  transition: transition-text-fill-color 0.3s;
+  transition: transition-text-stroke-color 0.3s;
+  transition: transition-text-stroke-width 0.3s;
+  transition: transition-will-change 0.3s;
+  transition: transition-align-content 0.3s;
+  transition: transition-align-items 0.3s;
+  transition: transition-align-self 0.3s;
+  transition: transition-animation 0.3s;
+  transition: transition-animation-delay 0.3s;
+  transition: transition-animation-direction 0.3s;
+  transition: transition-animation-duration 0.3s;
+  transition: transition-animation-fill-mode 0.3s;
+  transition: transition-animation-iteration-count 0.3s;
+  transition: transition-animation-name 0.3s;
+  transition: transition-animation-play-state 0.3s;
+  transition: transition-animation-timing-function 0.3s;
+  transition: transition-backface-visibility 0.3s;
+  transition: transition-border 0.3s;
+}
+
+/* Responsive Styles */
+@media (min-width: 576px) {
+  .promotion-bar {
+    width: 105%;
+    margin-left: -70px;
+  }
+
+  .current-time,
+  .promotion-period,
+  .discount-message {
+    margin: 0 10px;
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .promotion-bar {
+    width: 108%;
+    left: 0;
+    margin-left: 00px;
+  }
+
+  .current-time,
+  .promotion-period,
+  .discount-message {
+    margin: 0 10px;
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 992px) {
+  .promotion-bar {
+    width: 100%;
+    left: 0;
+    left: 0;
+  }
+
+  .current-time,
+  .promotion-period,
+  .discount-message {
+    margin: 0 10px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .current-time,
+  .promotion-period,
+  .discount-message {
+    margin: 0 10px;
+    font-size: 18px;
+  }
+  .promotion-bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .promotion-bar {
+    width: 100%;
+    left: 0;
+  }
+
+  .current-time,
+  .promotion-period,
+  .discount-message {
+    font-size: 6px;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.promotion-bar-content > div {
+  padding: 0 20px;
+  font-size: 1rem;
+  white-space: nowrap;
+}

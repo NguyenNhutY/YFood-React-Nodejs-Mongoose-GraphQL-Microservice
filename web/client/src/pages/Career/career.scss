@@ -1,0 +1,65 @@
+.career-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Khoảng cách giữa các phần tử
+  padding: 2rem; // Padding chung cho trang
+
+  // Tiêu đề
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+
+    margin-bottom: 2rem;
+  }
+
+  // Tìm kiếm
+  .search {
+    margin-bottom: 2rem;
+  }
+
+  // Danh sách công việc
+
+  // Chi tiết công việc
+  .job-detail {
+    flex: 1;
+    max-width: 100%;
+  }
+
+  // Form ứng tuyển
+  .apply-form {
+    max-width: 100%;
+  }
+
+  // Thông báo ứng tuyển thành công
+  .application-success {
+    color: #4caf50; // Màu xanh lá cây
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  // Phân trang
+  .pagination {
+    margin-top: 2rem;
+
+    button {
+      cursor: pointer;
+
+      &.active {
+        color: #fff;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        background: #e9ecef;
+        color: #6c757d;
+      }
+    }
+  }
+
+  // Media queries cho các thiết bị nhỏ hơn
+}
+
+.btn-back-history {
+  display: fixed;
+}
