@@ -43,4 +43,3 @@ const employeeSchema = gql`
     deleteEmployee(id: ID!): String # Trả về thông điệp xác nhận
   }
 `;
-export default employeeSchema;

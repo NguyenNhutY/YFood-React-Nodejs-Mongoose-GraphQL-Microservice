@@ -1,6 +1,3 @@
-// schema.js
-import { gql } from "apollo-server-express";
-
 const accountSchema = gql`
   scalar Date
 
@@ -10,7 +7,7 @@ const accountSchema = gql`
     password: String!
     isEmployee: Boolean!
     createdAt: Date!
-    name: String # Định nghĩa name tại đây nếu bạn cần
+    name: String
     employee_id: ID
     customer_id: ID
     account_id_in_user: ID
@@ -28,35 +25,40 @@ const accountSchema = gql`
     message: String
   }
 
+  type ResetPasswordResponse {
+    success: Boolean!
+    message: String
+  }
+
   type Query {
     getAccountByEmail(email: String!): Account
     getAllAccounts: [Account]!
     getAccountsByName(name: String!): [Account]!
     getAccountsByEmployeeHireDate: [Account]
-    getAccountByToken: [Account]
+    getAccountByToken: Account
     getAccountsByGender: [Account]
   }
 
   type Mutation {
-  updatePassword{
-   email: String!
-      oldpassword = password: String!
-       confirmPassword: String!
-       newPassword:String!
-  }:String
+    updatePassword(
+      email: String!
+      oldpassword: String!
+      confirmPassword: String!
+      newPassword: String!
+    ): String
     registerAccount(
       name: String!
       email: String!
-      oldpassword =: String!
+      password: String!
       confirmPassword: String!
       isEmployee: Boolean!
     ): Account
-    forgotPassword(email: String!): String # Thêm trường này
+    forgotPassword(email: String!): String
     resetPassword(
       token: String!
       newPassword: String!
       confirmPassword: String!
-    ): String # Thêm trường này
+    ): ResetPasswordResponse
     logoutAccount(token: String!): LogoutResponse
     loginAccount(
       email: String!

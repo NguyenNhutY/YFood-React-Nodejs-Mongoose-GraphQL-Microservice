@@ -22,7 +22,7 @@ const foodSchema = new mongoose.Schema({
   // material_name: { type: String, required: true },
 });
 
-const foodModel = mongoose.models.food || mongoose.model("food", foodSchema);
+const foodModel = mongoose.models.Food || mongoose.model("Food", foodSchema);
 
 const getFoodDetails = (food_id) => {
   return foodModel
@@ -36,4 +36,4 @@ const getFoodDetails = (food_id) => {
 
 export { getFoodDetails };
 
-export default foodModel;
+export default Food;

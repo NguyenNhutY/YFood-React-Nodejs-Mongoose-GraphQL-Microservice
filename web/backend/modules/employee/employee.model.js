@@ -18,6 +18,11 @@ const employeeSchema = new mongoose.Schema(
       ref: "Account",
       default: null,
     }, // Khóa ngoại để liên kết với Account
+    employee_active_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Employee_Active",
+      default: null,
+    },
     name: { type: "String", required: "true", default: null },
   },
   { minimize: false }
@@ -27,8 +32,8 @@ const Employee = mongoose.model("Employee", employeeSchema);
 
 const getEmployeeDetails = async (employeeId) => {
   try {
-    const employee = await Employee.findById(employeeId).populate("account_id"); // Lấy dữ liệu từ Account
-
+    const employee = await Employee.findById(employeeId).populate("account_id");
+    // .populate("employee_active_id"); // Lấy dữ liệu từ Account
     console.log(employee);
     return employee;
   } catch (error) {

@@ -29,10 +29,10 @@ const server = new ApolloServer({
 app.use(
   cors({
     origin: [
+      "http://localhost:4000/graphql/account",
       "http://localhost:5173", // Địa chỉ front-end
       "https://studio.apollographql.com", // Thêm địa chỉ Apollo Studio
     ],
-    credentials: true, // Nếu cần hỗ trợ cookie hoặc thông tin xác thực
   })
 );
 app.use(express.json());

@@ -62,6 +62,7 @@ const accountResolver = {
     getAllAccounts: async () => {
       return await Account.find().select("-password");
     },
+
     async getAccountsByName(_, { name }) {
       // Tìm kiếm employees theo tên
       const employees = await findEmployeeName(name);
@@ -99,7 +100,6 @@ const accountResolver = {
       }
 
       const accounts = [];
-
       // Nếu có dữ liệu employees, kết hợp vào mảng accounts
       if (employees && resultEmployees.length > 0) {
         accounts.push(
@@ -115,7 +115,6 @@ const accountResolver = {
           }))
         );
       }
-
       // Nếu có dữ liệu customers, kết hợp vào mảng accounts
       if (customers && resultCustomers.length > 0) {
         accounts.push(
@@ -130,7 +129,6 @@ const accountResolver = {
           }))
         );
       }
-
       return accounts;
     },
   },
@@ -230,10 +228,8 @@ const accountResolver = {
       try {
         // Kiểm tra tính hợp lệ của token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
         // Thêm token vào danh sách đen cho đến khi token hết hạn
         addToBlacklist(token);
-
         return { success: true, message: "Logged out successfully" };
       } catch (error) {
         console.error("Error logging out user:", error);
@@ -243,14 +239,11 @@ const accountResolver = {
     forgotPassword: async (_, { email }) => {
       const account = await Account.findOne({ email });
       if (!account) throw new ApolloError("Account not found");
-
       const resetToken = crypto.randomBytes(20).toString("hex");
       account.resetPasswordToken = resetToken;
       account.resetPasswordExpires = Date.now() + 3600000; // 1 hour
       await account.save();
-
       // Gửi email với mã reset token
-
       const mailOptions = {
         from: process.env.EMAIL_USER,
         to: email,
@@ -260,14 +253,12 @@ const accountResolver = {
                ${resetUrl}
                If you did not request this, please ignore this email and your password will remain unchanged.`,
       };
-
       try {
         await transporter.sendMail(mailOptions);
       } catch (error) {
         console.error("Error sending email:", error);
         throw new ApolloError("Failed to send email");
       }
-
       return { success: true, message: "Password reset email sent" };
     },
     updatePassword: async (
@@ -276,15 +267,11 @@ const accountResolver = {
     ) => {
       const account = await Account.findOne({ email: email });
       if (!account) throw new ApolloError("Account not found");
-
       const isMatch = await bcrypt.compare(oldPassword, account.password);
-
       if (!isMatch) throw new ApolloError("Old password is incorrect");
-
       if (newPassword !== confirmPassword || !isValidPassword(newPassword)) {
         throw new ApolloError("Password validation failed");
       }
-
       account.password = await bcrypt.hash(newPassword, 10);
       await account.save();
       return { success: true, message: "Password updated successfully" };
@@ -296,19 +283,23 @@ const accountResolver = {
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() },
     });
-    if (!account)
+  
+    if (!account) {
       throw new ApolloError("Invalid or expired token", "INVALID_TOKEN");
-
+    }
+  
     if (newPassword !== confirmPassword || !isValidPassword(newPassword)) {
       throw new ApolloError("Password validation failed");
     }
-
+  
     account.password = await bcrypt.hash(newPassword, 10);
     account.resetPasswordToken = undefined;
     account.resetPasswordExpires = undefined;
     await account.save();
+  
     return { success: true, message: "Password reset successfully" };
-  },
+  };
+  
 };
 
 export default accountResolver;
