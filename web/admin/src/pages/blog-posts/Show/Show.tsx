@@ -1,53 +1,52 @@
 import { Stack, Typography } from "@mui/material";
-import { useOne, useShow } from "@refinedev/core";
 import {
   DateField,
   MarkdownField,
   Show,
   TextFieldComponent as TextField,
 } from "@refinedev/mui";
+import { blogList } from "../../../types/typesBlog"; // Đảm bảo import đúng đường dẫn tới blogList
 
-export const BlogPostShow = () => {
-  const { queryResult } = useShow({});
+export const BlogPostShow = ({ id: string }) => {
+  // Tìm bài viết dựa trên id
+  const record = blogList.find((post) => post.id === id);
 
-  const { data, isLoading } = queryResult;
-
-  const record = data?.data;
-
-  const { data: categoryData, isLoading: categoryIsLoading } = useOne({
-    resource: "categories",
-    id: record?.category?.id || "",
-    queryOptions: {
-      enabled: !!record,
-    },
-  });
+  if (!record) {
+    return <Typography>Blog post not found</Typography>;
+  }
 
   return (
-    <Show isLoading={isLoading}>
+    <Show isLoading={false}>
       <Stack gap={1}>
         <Typography variant='body1' fontWeight='bold'>
           {"ID"}
         </Typography>
-        <TextField value={record?.id} />
+        <TextField value={record.id} />
 
         <Typography variant='body1' fontWeight='bold'>
           {"Title"}
         </Typography>
-        <TextField value={record?.title} />
+        <TextField value={record.title} />
 
         <Typography variant='body1' fontWeight='bold'>
           {"Content"}
         </Typography>
-        <MarkdownField value={record?.content} />
+        <MarkdownField value={record.content} />
 
         <Typography variant='body1' fontWeight='bold'>
-          {"Status"}
+          {"Author"}
         </Typography>
-        <TextField value={record?.status} />
+        <TextField value={record.author} />
+
         <Typography variant='body1' fontWeight='bold'>
-          {"CreatedAt"}
+          {"Date"}
         </Typography>
-        <DateField value={record?.createdAt} />
+        <DateField value={record.date} />
+
+        <Typography variant='body1' fontWeight='bold'>
+          {"Likes"}
+        </Typography>
+        <TextField value={record.likes} />
       </Stack>
     </Show>
   );

@@ -12,6 +12,10 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "../backend/helpers/generatePromoCodes.js"],
+  "include": [
+    "src/**/*",
+    "../backend/helpers/generatePromoCodes.js",
+    "src/structure"
+  ],
   "exclude": ["node_modules"]
 }

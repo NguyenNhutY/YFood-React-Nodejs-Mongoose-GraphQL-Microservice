@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
+// Load biến môi trường
+dotenv.config();
 export const connectDB = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://kirichijikuzu:jkt74153967591@cluster0.duwepdz.mongodb.net/Yfood?retryWrites=true&w=majority",
-      {
-        // Bỏ tùy chọn useNewUrlParser và useUnifiedTopology
-        ssl: true,
-      }
-    );
+    await mongoose.connect(process.env.URL_MONGO, {
+      ssl: true, // Nếu cần thiết, để thiết lập SSL
+    });
     console.log("Kết nối db thành công");
   } catch (error) {
     console.error("Lỗi kết nối đến cơ sở dữ liệu", error);
 
+    // Xử lý các lỗi kết nối
     if (
       error.name === "MongoNetworkError" &&
       error.message.includes("IP address is not whitelisted")

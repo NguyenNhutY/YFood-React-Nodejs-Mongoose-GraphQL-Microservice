@@ -6,9 +6,9 @@ import React, {
   ReactNode,
 } from "react";
 import { food_list as initialFoodList } from "../assets/frontend_assets/assets";
-import promoCodesData from "../../../backend/helpers/promoCodes.json";
-import { PromoCodeTrie } from "../types/structure/PromoCodeTrie";
-import { ForbiddenWordsTree } from "../types/structure/ForbiddenWordsTree";
+import promoCodesData from "../../../backend/types/promoCodes.json";
+import { PromoCodeTrie } from "../structure/PromoCodeTrie";
+import { ForbiddenWordsTree } from "../structure/ForbiddenWordsTree";
 import { forbiddenWordsData } from "../types/forbiddenWordsData";
 
 // Interface Definitions
