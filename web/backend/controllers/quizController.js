@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Quiz from "../data/models/quizModel"; // Import your model
 
-export const getAllQuizzes = async (req: Request, res: Response) => {
+export const getAllQuizzes = async () => {
   try {
     const quizzes = await Quiz.find();
     res.status(200).json(quizzes);
@@ -10,7 +10,7 @@ export const getAllQuizzes = async (req: Request, res: Response) => {
   }
 };
 
-export const getQuizById = async (req: Request, res: Response) => {
+export const getQuizById = async () => {
   const { id } = req.params;
   try {
     const quiz = await Quiz.findById(id);
@@ -24,7 +24,7 @@ export const getQuizById = async (req: Request, res: Response) => {
   }
 };
 
-export const createQuiz = async (req: Request, res: Response) => {
+export const createQuiz = async () => {
   const quizData = req.body;
   try {
     const newQuiz = new Quiz(quizData);
@@ -35,7 +35,7 @@ export const createQuiz = async (req: Request, res: Response) => {
   }
 };
 
-export const updateQuiz = async (req: Request, res: Response) => {
+export const updateQuiz = async () => {
   const { id } = req.params;
   const updateData = req.body;
   try {
@@ -52,7 +52,7 @@ export const updateQuiz = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteQuiz = async (req: Request, res: Response) => {
+export const deleteQuiz = async () => {
   const { id } = req.params;
   try {
     const deletedQuiz = await Quiz.findByIdAndDelete(id);
@@ -66,7 +66,7 @@ export const deleteQuiz = async (req: Request, res: Response) => {
   }
 };
 
-export const searchQuiz = async (req: Request, res: Response) => {
+export const searchQuiz = async () => {
   const query = req.query;
   try {
     const quizzes = await Quiz.find(query);
@@ -76,7 +76,7 @@ export const searchQuiz = async (req: Request, res: Response) => {
   }
 };
 
-export const getQuizsByScore = async (req: Request, res: Response) => {
+export const getQuizsByScore = async () => {
   const { minScore, maxScore } = req.query;
   try {
     const quizzes = await Quiz.find({

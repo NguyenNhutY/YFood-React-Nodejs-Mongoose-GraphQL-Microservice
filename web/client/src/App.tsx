@@ -16,12 +16,13 @@ import Career from "./pages/Career/Career";
 import Layout from "./containers/Layout/Layout";
 import PullToRefresh from "react-pull-to-refresh";
 import "react-toastify/dist/ReactToastify.css";
-import MusicBar from "./components/MusicBar/MusicBarContainer";
 import BlogPage from "./pages/Blog/Blog";
 import "./App.scss";
 import BlogDetail from "./components/BlogDetail/BlogDetail";
 import ProductPage from "./pages/Product/Product";
 import Quiz from "./pages/Quiz/Quiz";
+import {ApolloProvider } from "@apollo/client"
+import clientGraphql from "./ApolloClient"
 
 const App: React.FC = () => {
   const [searchName, setSearchName] = useState<string>("");

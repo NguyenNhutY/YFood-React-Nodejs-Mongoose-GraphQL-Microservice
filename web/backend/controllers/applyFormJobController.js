@@ -1,4 +1,4 @@
-import ApplyFormJobModel from "../data/models/ApplyFormJobModel.js";
+import ApplyFormJobModel from "../data/models/applyFormModel";
 
 // Tạo đơn ứng tuyển công việc mới
 export const createApplyFormJob = async (req, res) => {
@@ -14,7 +14,7 @@ export const createApplyFormJob = async (req, res) => {
 // Lấy tất cả các đơn ứng tuyển công việc
 export const getAllApplyFormJobs = async (req, res) => {
   try {
-    const applyFormJobs = await ApplyFormJobModel.find();
+    const applyFormJobs = await ApplyFormJobModel.find( );
     res.status(200).json(applyFormJobs);
   } catch (error) {
     res.status(500).json({ message: "Error fetching apply form jobs", error });

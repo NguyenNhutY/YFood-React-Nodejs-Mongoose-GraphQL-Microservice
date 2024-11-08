@@ -4,7 +4,7 @@ import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import "./app.scss";
 import {
   ErrorComponent,
-  notificationProvider,
+
   RefineSnackbarProvider,
   ThemedLayoutV2,
 } from "@refinedev/mui";

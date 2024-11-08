@@ -3,10 +3,13 @@
   z-index: 1;
   width: 100%;
   height: 100%;
+
   background-color: rgba(0, 0, 0, 0.5);
   display: grid;
 }
-
+.error-message {
+  color: red;
+}
 .login-popup-container {
   place-self: center;
   width: max(23vw, 380px);

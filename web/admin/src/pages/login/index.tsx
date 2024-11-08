@@ -63,7 +63,7 @@ export const Login: React.FC = () => {
     if (detections.length > 0) {
       const faceData = detections[0].descriptor;
       // Gửi dữ liệu khuôn mặt đến server
-      fetch("/api/face-login", {
+      fetch("/api/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ faceData }),

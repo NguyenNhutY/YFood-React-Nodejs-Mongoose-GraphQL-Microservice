@@ -430,8 +430,6 @@ function Zoom(_ref) {
     if (currentScale === 1 && forceZoomRatio) {
       touchX = undefined;
       touchY = undefined;
-      image.touchesStart.x = undefined;
-      image.touchesStart.y = undefined;
     }
     const maxRatio = getMaxRatio();
     zoom.scale = forceZoomRatio || maxRatio;
@@ -505,8 +503,6 @@ function Zoom(_ref) {
     }
     zoom.scale = 1;
     currentScale = 1;
-    image.touchesStart.x = undefined;
-    image.touchesStart.y = undefined;
     gesture.imageWrapEl.style.transitionDuration = '300ms';
     gesture.imageWrapEl.style.transform = 'translate3d(0,0,0)';
     gesture.imageEl.style.transitionDuration = '300ms';

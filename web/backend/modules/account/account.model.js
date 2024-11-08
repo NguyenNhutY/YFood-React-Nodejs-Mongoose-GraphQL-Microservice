@@ -8,9 +8,15 @@ const accountSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    resetPasswordToken: { type: String, default: null },
+    resetPasswordExpires: { type: Date, default: new Date() },
 
     email: { type: String, required: true, unique: true },
-    isEmployee: { type: Boolean, default: true },
+    role_account: {
+      type: String,
+      enum: ["admin", "employee", "customer"],
+      default: null,
+    },
     password: { type: String, required: true, default: null },
     employee_id: {
       type: mongoose.Schema.Types.ObjectId,

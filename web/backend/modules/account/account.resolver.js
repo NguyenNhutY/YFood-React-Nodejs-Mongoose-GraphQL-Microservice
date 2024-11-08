@@ -19,6 +19,7 @@ import UserFinderFactory from "./creational/user.finder.factory.js";
 import { findEmployeeName } from "../employee/employee.service.js";
 import { findCustomerName } from "../customer/customer.service.js";
 import AccountService from "./account.service.js"; // A new service class for account-related operations
+import session from "session";
 
 const createToken = (email) => {
   return jwt.sign({ email }, process.env.JWT_SECRET, {
@@ -33,104 +34,59 @@ const accountResolver = {
     getAccountByEmail: async (_, { email }) => {
       try {
         // Retrieve account information
-        const account = await Account.findOne({ email }).select(
-          "email account_id isEmployee"
+        const account = await Account.findOne({ email: email }).select(
+          "-password"
         );
+
         if (!account) {
           throw new Error("Account not found"); // This will throw an error if the account is null
         }
 
-        // Retrieve user information using UserFinderFactory
-        const user = await UserFinderFactory.findUser(
-          account.account_id,
-          account.isEmployee
-        );
-        if (!user) {
-          throw new Error("User not found");
-        }
-
-        // Return the requested fields
         return {
+          success: true,
           email: account.email,
-          isEmployee: account.isEmployee,
-          name: user.name, // Accessing name directly from the user object
+          role_account: account.role_account,
         };
       } catch (error) {
         throw new ApolloError(error.message, "INTERNAL_SERVER_ERROR");
       }
     },
+
     getAllAccounts: async () => {
       return await Account.find().select("-password");
     },
-
-    async getAccountsByName(_, { name }) {
-      // Tìm kiếm employees theo tên
-      const employees = await findEmployeeName(name);
-      // Tìm kiếm customers theo tên
-      const customers = await findEmployeeName(name);
-
-      console.log(customers); // Kiểm tra dữ liệu customers
-
-      // Kiểm tra dữ liệu trả về có phải là mảng không trước khi xử lý
-      const resultEmployees = Array.isArray(employees)
-        ? employees.map((employee) => ({
-            name: employee.name,
-            account_id: employee.account_id,
-          }))
-        : employees
-        ? [employees]
-        : []; // Nếu employees không phải mảng nhưng có dữ liệu, gói nó trong mảng
-
-      const resultCustomers = Array.isArray(customers)
-        ? customers.map((customer) => ({
-            name: customer.name,
-            account_id: customer.account_id,
-          }))
-        : customers
-        ? [customers]
-        : []; // Nếu customers không phải mảng nhưng có dữ liệu, gói nó trong mảng
-      console.log("employees:", employees);
-      console.log("customers:", customers);
-
-      console.log("resultEmployees:", resultEmployees);
-      console.log("resultCustomers:", resultCustomers);
-      // Nếu không có dữ liệu, trả về thông báo hoặc mảng rỗng
-      if (resultEmployees.length === 0 && resultCustomers.length === 0) {
-        return [];
+    getAllAccountsByRoleAccount: async (role_account) => {
+      return await Account.find({ role_account: role_account }).select(
+        "-password"
+      );
+    },
+    getAccountsByName: async (_, { name }) => {
+      let accounts = [];
+      // Giả sử bạn xác định admin thông qua một giá trị trong server (có thể là một biến toàn cục hoặc một thông số nào đó)
+      const isAdmin = true; // Ví dụ: bạn có thể thay thế giá trị này bằng cách khác để xác định admin
+      // Nếu là admin, tìm cả employee và customer
+      if (isAdmin) {
+        const employees = await Employee.find({ name: name });
+        const customers = await Customer.find({ name: name });
+        // Kết hợp cả employee và customer
+        accounts = [...employees, ...customers];
+      } else {
+        // Nếu không phải admin, tìm customer hoặc employee tùy ý (hoặc có thể là chỉ tìm employee)
+        const employees = await Employee.find({ name: name });
+        const customers = await Customer.find({ name: name });
+        // Trả về kết quả tìm kiếm của cả hai, hoặc một loại cụ thể tùy theo yêu cầu
+        accounts = [...employees, ...customers]; // Kết hợp tất cả kết quả
       }
-
-      const accounts = [];
-      // Nếu có dữ liệu employees, kết hợp vào mảng accounts
-      if (employees && resultEmployees.length > 0) {
-        accounts.push(
-          ...resultEmployees.map((employee) => ({
-            email: accont.email,
-            isEmployee: true,
-            employee_id: employee.employee_id,
-            pass: employee.pass,
-            employee: {
-              name: employee.name,
-              account_id: employee.account_id,
-            },
-          }))
-        );
-      }
-      // Nếu có dữ liệu customers, kết hợp vào mảng accounts
-      if (customers && resultCustomers.length > 0) {
-        accounts.push(
-          ...resultCustomers.map((customer) => ({
-            email: accont.email,
-            isEmployee: false,
-            customer_id: customer.customer_id,
-            pass: customer.pass,
-
-            name: customer.name,
-            _id: customer.account_id,
-          }))
-        );
-      }
+      console.log(accounts); // Kiểm tra dữ liệu trả về
       return accounts;
     },
+    getAcountbyId: async (_,{_id})=>{
+      const account = await Account.findById(_id).select("-password");
+      if (!account) {
+        throw new Error("Account not found");
+      }
+      return account;
+    }
   },
   Mutation: {
     registerAccount: async (
@@ -149,7 +105,7 @@ const accountResolver = {
         // Check if passwords match
         validatePasswordMatch(password, confirmPassword);
         // Check if email already exists
-        await UserCheckEmail.checkEmail(email, isEmployee);
+        await UserCheckEmail.checkEmail(email, role_account);
         // Hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -157,27 +113,27 @@ const accountResolver = {
         const newAccount = await AccountService.createAccount(
           email,
           hashedPassword,
-          isEmployee
+          role_account
         );
         // Create the user (Employee or Customer)
         const createdUser = await UserCreateFactory.createUser(
           name,
           email,
-          isEmployee,
+          role_account,
           newAccount._id
         );
         // Link the user to the account and save
         await AccountService.linkUserToAccount(
           newAccount,
           createdUser,
-          isEmployee
+          role_account
         );
         // Return the user info
         return AccountService.getAccountResponse(
           newAccount,
           createdUser,
           name,
-          isEmployee
+          role_account
         );
       } catch (error) {
         throw new ApolloError(
@@ -186,20 +142,22 @@ const accountResolver = {
         );
       }
     },
-    async loginAccount(_, { email, password, isEmployee }) {
+    async loginAccount(_, { email, password, isEmployee }, context) {
       // Tìm tài khoản theo email
-      const account = await Account.findOne({ email });
+      const account = await Account.findOne({ email: email });
       if (!account) {
-        throw new Error("Tài khoản không tồn tại");
+        throw new ApolloError("Tài khoản không tồn tại");
       }
       // Kiểm tra password
       const isMatch = await bcrypt.compare(password, account.password);
       if (!isMatch) {
-        throw new Error("Mật khẩu không chính xác");
+        throw new ApolloError("Mật khẩu không chính xác");
       }
       if (account.isEmployee !== isEmployee) {
         // Nếu isEmployee sai, trả về lỗi cụ thể
-        throw new Error(`Quyền truy cập không chính xác cho email ${email}`);
+        throw new ApolloError(
+          `Quyền truy cập không chính xác cho email ${email}`
+        );
       }
       // Kiểm tra quyền truy cập (isEmployee)
       let user = null;
@@ -216,7 +174,11 @@ const accountResolver = {
       // Tạo token
       const token = jwt.sign({ _id: account._id }, "secret-key", {
         expiresIn: "1h",
+        algorithm: "HS256",
+        subject: "User Registration",
       });
+      context.session.token = token;
+
       return {
         token,
         name: user.name,
@@ -226,8 +188,11 @@ const accountResolver = {
     },
     logoutAccount: async (_, { token }) => {
       try {
-        // Kiểm tra tính hợp lệ của token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        context.session.destroy((err) => {
+          if (err) {
+            throw ApolloError("Err destroying");
+          }
+        });
         // Thêm token vào danh sách đen cho đến khi token hết hạn
         addToBlacklist(token);
         return { success: true, message: "Logged out successfully" };
@@ -276,30 +241,33 @@ const accountResolver = {
       await account.save();
       return { success: true, message: "Password updated successfully" };
     },
+    resetPassword: async (_, { token, newPassword, confirmPassword }) => {
+      // Tìm tài khoản bằng token reset password
+      const account = await Account.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() },
+      });
+      // Kiểm tra nếu không tìm thấy tài khoản hoặc token hết hạn
+      if (!account) {
+        throw new ApolloError("Invalid or expired token", "INVALID_TOKEN");
+      }
+      // Kiểm tra nếu mật khẩu mới không khớp hoặc không hợp lệ
+      if (newPassword !== confirmPassword || !isValidPassword(newPassword)) {
+        throw new ApolloError("Password validation failed");
+      }
+      // Cập nhật mật khẩu cho tài khoản
+      account.password = await bcrypt.hash(newPassword, 10);
+      account.resetPasswordToken = undefined;
+      account.resetPasswordExpires = undefined;
+      // Lưu tài khoản đã thay đổi mật khẩu
+      await account.save();
+      // Trả về đối tượng thành công theo schema định nghĩa
+      return {
+        success: true,
+        message: "Password reset successfully",
+      };
+    },
   },
-
-  resetPassword: async (_, { token, newPassword, confirmPassword }) => {
-    const account = await Account.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() },
-    });
-  
-    if (!account) {
-      throw new ApolloError("Invalid or expired token", "INVALID_TOKEN");
-    }
-  
-    if (newPassword !== confirmPassword || !isValidPassword(newPassword)) {
-      throw new ApolloError("Password validation failed");
-    }
-  
-    account.password = await bcrypt.hash(newPassword, 10);
-    account.resetPasswordToken = undefined;
-    account.resetPasswordExpires = undefined;
-    await account.save();
-  
-    return { success: true, message: "Password reset successfully" };
-  };
-  
 };
 
 export default accountResolver;

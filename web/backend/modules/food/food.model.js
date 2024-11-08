@@ -1,5 +1,5 @@
 // model logic for Folder4import mongoose from "mongoose"; // Corrected import from "mongose" to "mongoose"
-
+import mongoose from "mongoose";
 import { Decimal128 } from "bson";
 
 const foodSchema = new mongoose.Schema({

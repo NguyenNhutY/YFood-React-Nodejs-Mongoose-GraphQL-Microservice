@@ -38,9 +38,7 @@ const Home: React.FC<HomeProps> = ({ searchName }) => {
     <div className='home'>
       <ErrorBoundary>
         <React.Suspense fallback={<Loading />}>
-          <AnimatedBox>
-            <IntroBtn className='btn-intro-home' steps={homeIntroSteps} />
-          </AnimatedBox>
+          <AnimatedBox></AnimatedBox>
         </React.Suspense>
       </ErrorBoundary>
       <ErrorBoundary>

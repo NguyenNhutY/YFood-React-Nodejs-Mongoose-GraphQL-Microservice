@@ -1,3 +1,5 @@
+import { gql } from "apollo-server-express";
+
 const accountSchema = gql`
   scalar Date
 
@@ -5,8 +7,10 @@ const accountSchema = gql`
     _id: ID!
     email: String!
     password: String!
-    isEmployee: Boolean!
+    role_account: String!
     createdAt: Date!
+    resetPasswordToken: String!
+    resetPasswordExpires: Date!
     name: String
     employee_id: ID
     customer_id: ID
@@ -16,7 +20,7 @@ const accountSchema = gql`
   type LoginResponse {
     token: String
     name: String
-    isEmployee: Boolean
+    role_access: String!
     email: String
   }
 
@@ -51,7 +55,7 @@ const accountSchema = gql`
       email: String!
       password: String!
       confirmPassword: String!
-      isEmployee: Boolean!
+      role_account: String!
     ): Account
     forgotPassword(email: String!): String
     resetPassword(
@@ -62,7 +66,7 @@ const accountSchema = gql`
     logoutAccount(token: String!): LogoutResponse
     loginAccount(
       email: String!
-      isEmployee: Boolean!
+      role_account: String!
       password: String!
     ): LoginResponse
   }

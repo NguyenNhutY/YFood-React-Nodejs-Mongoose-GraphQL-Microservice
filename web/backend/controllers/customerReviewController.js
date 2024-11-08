@@ -3,12 +3,7 @@ import CustomerReviewModel from "../data/models/customerReviewModel.js";
 // types.ts
 
 // Định nghĩa kiểu dữ liệu cho các thông tin đánh giá của khách hàng
-export interface CustomerReviewInput {
-  customerName: string;
-  reviewText: string;
-  rating: number; // Rating in a range (e.g., 1 to 5)
-  date: Date;
-}
+
 
 // Thêm đánh giá của khách hàng
 export const addCustomerReview = async (req, res) => {

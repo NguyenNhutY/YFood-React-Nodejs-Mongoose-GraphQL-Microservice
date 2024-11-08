@@ -7,7 +7,7 @@ import {
 } from "@refinedev/mui";
 import { blogList } from "../../../types/typesBlog"; // Đảm bảo import đúng đường dẫn tới blogList
 
-export const BlogPostShow = ({ id: string }) => {
+export const BlogPostShow = ({ id }) => {
   // Tìm bài viết dựa trên id
   const record = blogList.find((post) => post.id === id);
 

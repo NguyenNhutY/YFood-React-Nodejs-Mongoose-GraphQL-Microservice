@@ -3,14 +3,16 @@ import dotenv from "dotenv";
 
 // Load biến môi trường
 dotenv.config();
+
 export const connectDB = async () => {
   try {
     await mongoose.connect(process.env.URL_MONGO, {
-      ssl: true, // Nếu cần thiết, để thiết lập SSL
+      ssl: true, // SSL connection
     });
+
     console.log("Kết nối db thành công");
   } catch (error) {
-    console.error("Lỗi kết nối đến cơ sở dữ liệu", error);
+    console.error("Lỗi kết nối đến cơ sở dữ liệu:", error.message);
 
     // Xử lý các lỗi kết nối
     if (
@@ -32,6 +34,6 @@ export const connectDB = async () => {
       console.error("Đã xảy ra lỗi không xác định:", error);
     }
 
-    process.exit(1);
+    process.exit(1); // Kết thúc ứng dụng nếu không thể kết nối
   }
 };

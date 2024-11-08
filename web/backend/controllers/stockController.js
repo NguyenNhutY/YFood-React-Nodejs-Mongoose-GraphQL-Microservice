@@ -160,7 +160,7 @@ export const getRecentlyUpdated = async () => {
 // Lấy kho hàng theo ngày
 export const getStockByDate = async () => {
   try {
-    const { date } = req.query as ;
+    const { date } = req.query ;
     const stocks = await StockModel.find({ date: new Date(date ?? '') });
     res.status(200).json(stocks);
   } catch (error) {

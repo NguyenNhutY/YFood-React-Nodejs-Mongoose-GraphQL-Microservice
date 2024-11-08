@@ -1,60 +1,8 @@
-version: "3.8"
-
+version: '3'
 services:
-  nginx:
-    image: nginx:latest
+  account:
+    build:
+      context: ./account
     ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - product
-      - customer
-      - quizs
-      - blogs
-      - career
-      - rabbitmq
+      - "4001:4001"
 
-  product:
-    image: your_product_image
-    ports:
-      - "8002:8002"
-    depends_on:
-      - rabbitmq
-
-  customer:
-    image: your_customer_image
-    ports:
-      - "8001:8001"
-    depends_on:
-      - rabbitmq
-
-  quizs:
-    image: your_quizs_image
-    ports:
-      - "8004:8004"
-    depends_on:
-      - rabbitmq
-
-  blogs:
-    image: your_blogs_image
-    ports:
-      - "8005:8005"
-    depends_on:
-      - rabbitmq
-
-  career:
-    image: your_career_image
-    ports:
-      - "8006:8006"
-    depends_on:
-      - rabbitmq
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672" # RabbitMQ message broker
-      - "15672:15672" # RabbitMQ Management UI
-    environment:
-      RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASS: password

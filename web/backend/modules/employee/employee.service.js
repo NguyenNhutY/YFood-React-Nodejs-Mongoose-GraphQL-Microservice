@@ -10,21 +10,7 @@ export const createEmployee = async (data) => {
 };
 // Assuming you're using MongoDB with Mongoose
 
-export const findEmployeeAccountId = async (accountId) => {
-  try {
-    // Tìm nhân viên theo accountId
-    const employee = await Employee.findOne({ account_id: accountId }).exec();
 
-    if (!employee) {
-      throw new Error("Employee not found");
-    }
-
-    return employee; // Trả về đối tượng nhân viên nếu tìm thấy
-  } catch (error) {
-    console.error("Error finding employee:", error);
-    throw new Error("Error finding employee");
-  }
-};
 
 export const findEmployeeName = async (name) => {
   try {

@@ -1,22 +1,10 @@
-import jwt from "jsonwebtoken";
-import validator from "validator";
+import nodemailer from "nodemailer";
 
-export const isValidPassword = (password) => {
-  const minLength = validator.isLength(password, { min: 8, max: 100 });
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasNumber = /[0-9]/.test(password);
-  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-  return (
-    minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar
-  );
-};
-
-export const createToken = (email) => {
-  return jwt.sign({ email }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-    algorithm: "HS256",
-    subject: "User Registration",
-  });
-};
+// Cấu hình transporter cho Nodemailer
+const transporter = nodemailer.createTransport({
+  service: "gmail", // hoặc sử dụng máy chủ SMTP khác
+  auth: {
+    user: process.env.EMAIL_USER, // Email của bạn
+    pass: process.env.EMAIL_PASS, // Mật khẩu ứng dụng
+  },
+});

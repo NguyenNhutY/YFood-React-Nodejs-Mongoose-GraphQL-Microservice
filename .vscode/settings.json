@@ -1,4 +1,17 @@
 {
   "editor.fontVariations": false,
-  "editor.fontFamily": "Consolas, 'Courier New', monospace, Jetbarins Mono"
+  "editor.fontFamily": "Consolas, 'Courier New', monospace, Jetbarins Mono",
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSmoothCaretAnimation": "off",
+  "editor.smoothScrolling": false,
+  "editor.largeFileOptimizations": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "editor.quickSuggestions": {
+    "comments": "off",
+    "strings": "off",
+    "other": "off"
+  },
+  "git.ignoreLimitWarning": true
 }

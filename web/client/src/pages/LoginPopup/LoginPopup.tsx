@@ -10,7 +10,22 @@ import "intro.js/introjs.css";
 import { loginPopupIntroSteps } from "../../types";
 import IntroTourButton from "../../components/IntroBtn/IntroBtn";
 import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
-
+import { gql, useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
+const LOGIN_MUTATION = gql`
+  mutation loginAccount(
+    $email: String!
+    $password: String!
+    $isEmployee: Boolean!
+  ) {
+    loginAccount(email: $email, password: $password, isEmployee: $isEmployee) {
+      token
+      name
+      email
+      isEmployee
+    }
+  }
+`;
 interface LoginPopupProps {
   showLogin: boolean;
   setShowLogin: (show: boolean) => void; // Fixed prop name here
@@ -25,12 +40,43 @@ interface FormValues {
 
 const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
   const authContext = useContext(AuthContext);
+
   if (!showLogin) return null;
   const [currState, setCurrState] = useState<string>("Login");
   const [showModalPolicy, setShowModalPolicy] = useState<boolean>(false);
   const [showPasswordGenerator, setShowPasswordGenerator] = useState<boolean>(
     false
   );
+  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
+  const [loginError, setLoginError] = useState<string | null>(null);
+
+  const handleSubmit = (
+    values: FormValues,
+    actions: FormikHelpers<FormValues>
+  ) => {
+    login({
+      variables: {
+        email: values.email,
+        password: values.password,
+        isEmployee: false,
+      }, // Can be dynamically set based on login state
+    })
+      .then((response) => {
+        const { name, token } = response.data.loginAccount;
+        console.log({ token, name });
+        authContext?.login(name); // Assuming authContext has login method to set token
+        setShowLogin(false); // Close login popup
+      })
+      .catch((err) => {
+        console.error("Login error:", err);
+        setLoginError("Incorrect email or password."); // Set the error message
+
+        actions.setSubmitting(false);
+      });
+  };
+
+  const navigate = useNavigate(); // Dùng để chuyển hướng sau khi login thành công
+
   const [passwordValidation, setPasswordValidation] = useState({
     minLength: false,
     hasUpperCase: false,
@@ -92,16 +138,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
       <Formik
         initialValues={{ name: "", email: "", password: "", terms: false }}
         validationSchema={validationSchema}
-        onSubmit={(values: FormValues, actions: FormikHelpers<FormValues>) => {
-          console.log(values);
-          actions.setSubmitting(false);
-          if (currState === "Sign Up") {
-            setCurrState("Login");
-          } else if (authContext) {
-            authContext.login(values.name); // Update AuthContext on login
-            setShowLogin(false); // Close login popup
-          }
-        }}
+        onSubmit={handleSubmit}
       >
         {({ isSubmitting, setFieldValue }) => (
           <Form className='login-popup-container'>
@@ -173,6 +210,10 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
                   component='div'
                   className='error'
                 />
+                {loginError && (
+                  <div className='error-message'>{loginError}</div>
+                )}
+
                 {showPasswordCriteria && currState === "Sign Up" && (
                   <div className='password-criteria'>
                     <div className='criteria-row'>

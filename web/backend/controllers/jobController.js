@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import JobModel from "../data/models/JobModel"; // Đảm bảo đường dẫn đến model là chính xác
 
 // Tạo công việc mới
-export const createJob = async (req: Request, res: Response): Promise<void> => {
+export const createJob = async () => {
   try {
     const newJob = new JobModel(req.body);
     await newJob.save();
@@ -13,10 +13,7 @@ export const createJob = async (req: Request, res: Response): Promise<void> => {
 };
 
 // Lấy tất cả các công việc
-export const getAllJobs = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getAllJobs = async () => {
   try {
     const jobs = await JobModel.find();
     res.status(200).json(jobs);
@@ -26,10 +23,7 @@ export const getAllJobs = async (
 };
 
 // Lấy công việc theo ID
-export const getJobById = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getJobById = async () => {
   try {
     const job = await JobModel.findById(req.params.id);
     if (!job) {
@@ -42,7 +36,7 @@ export const getJobById = async (
 };
 
 // Cập nhật công việc
-export const updateJob = async (req: Request, res: Response): Promise<void> => {
+export const updateJob = async ()=> {
   try {
     const updatedJob = await JobModel.findByIdAndUpdate(
       req.params.id,
@@ -59,7 +53,7 @@ export const updateJob = async (req: Request, res: Response): Promise<void> => {
 };
 
 // Xóa công việc
-export const deleteJob = async (req: Request, res: Response): Promise<void> => {
+export const deleteJob = async () => {
   try {
     const deletedJob = await JobModel.findByIdAndDelete(req.params.id);
     if (!deletedJob) {
@@ -72,12 +66,9 @@ export const deleteJob = async (req: Request, res: Response): Promise<void> => {
 };
 
 // Tìm kiếm công việc
-export const searchJobs = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const searchJobs = async ()=> {
   try {
-    const query = req.query.query as string;
+    const query = req.query.query ;
     const jobs = await JobModel.find({ title: new RegExp(query, "i") });
     res.status(200).json(jobs);
   } catch (error) {
@@ -86,10 +77,7 @@ export const searchJobs = async (
 };
 
 // Lấy công việc theo vị trí
-export const getJobsByLocation = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getJobsByLocation = async () => {
   try {
     const location = req.params.location;
     const jobs = await JobModel.find({ location });
@@ -100,10 +88,7 @@ export const getJobsByLocation = async (
 };
 
 // Lấy công việc theo kinh nghiệm
-export const getJobsByExperience = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getJobsByExperience = async () => {
   try {
     const minExperience = parseInt(req.params.minExperience);
     const maxExperience = parseInt(req.params.maxExperience);
@@ -119,10 +104,7 @@ export const getJobsByExperience = async (
 };
 
 // Lấy công việc theo trình độ học vấn
-export const getJobsByDegree = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getJobsByDegree = async ()=> {
   try {
     const degree = req.params.degree;
     const jobs = await JobModel.find({ degreeRequired: degree });
@@ -133,12 +115,9 @@ export const getJobsByDegree = async (
 };
 
 // Lấy công việc theo kỹ năng
-export const getJobsBySkills = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getJobsBySkills = async ()=> {
   try {
-    const skills = (req.query.skills as string).split(",");
+    const skills = (req.query.skills ).split(",");
     const jobs = await JobModel.find({ skills: { $in: skills } });
     res.status(200).json(jobs);
   } catch (error) {
@@ -147,13 +126,10 @@ export const getJobsBySkills = async (
 };
 
 // Phân trang công việc
-export const paginateJobs = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const paginateJobs = async () => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
+    const page = parseInt(req.query.page ) || 1;
+    const limit = parseInt(req.query.limit ) || 10;
     const jobs = await JobModel.find()
       .skip((page - 1) * limit)
       .limit(limit);
@@ -164,10 +140,10 @@ export const paginateJobs = async (
 };
 
 // Sắp xếp công việc
-export const sortJobs = async (req: Request, res: Response): Promise<void> => {
+export const sortJobs = async () => {
   try {
-    const sortBy = (req.query.sortBy as string) || "createdAt";
-    const order = (req.query.order as string) || "asc";
+    const sortBy = (req.query.sortBy ) || "createdAt";
+    const order = (req.query.order ) || "asc";
     const jobs = await JobModel.find().sort({
       [sortBy]: order === "asc" ? 1 : -1,
     });
@@ -178,10 +154,7 @@ export const sortJobs = async (req: Request, res: Response): Promise<void> => {
 };
 
 // Lấy công việc theo ngày tạo
-export const getJobsByCreatedAt = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getJobsByCreatedAt = async () => {
   try {
     const startDate = new Date(req.params.startDate);
     const endDate = new Date(req.params.endDate);
@@ -197,10 +170,7 @@ export const getJobsByCreatedAt = async (
 };
 
 // Lấy công việc theo ngày cập nhật
-export const getJobsByUpdatedAt = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getJobsByUpdatedAt = async () => {
   try {
     const startDate = new Date(req.params.startDate);
     const endDate = new Date(req.params.endDate);
@@ -216,10 +186,7 @@ export const getJobsByUpdatedAt = async (
 };
 
 // Lấy công việc theo trạng thái
-export const getJobsByStatus = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getJobsByStatus = async () => {
   try {
     const status = req.params.status;
     const jobs = await JobModel.find({ status });

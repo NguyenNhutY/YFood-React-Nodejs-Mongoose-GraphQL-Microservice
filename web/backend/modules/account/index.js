@@ -6,12 +6,23 @@ import { ApolloServer } from "apollo-server-express";
 import accountSchema from "./account.schema.js";
 import accountResolver from "./account.resolver.js";
 import { DateScalar } from "./utils/custom.date.js";
+import session from "express-session"; // Đảm bảo sử dụng express-session thay vì session
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Kết nối đến cơ sở dữ liệu
 connectDB();
+
+// Sử dụng express-session để lưu trữ session
+app.use(
+  session({
+    secret: "your-secret-key", // Thay đổi secret key cho session của bạn
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: process.env.NODE_ENV === "production" }, // Thiết lập cookie cho bảo mật
+  })
+);
 
 // Khởi tạo Apollo Server với schema và resolvers
 const server = new ApolloServer({
@@ -20,8 +31,10 @@ const server = new ApolloServer({
     ...accountResolver,
     Date: DateScalar,
   },
+  // Sửa lại phần context để nhận đối tượng req
   context: ({ req }) => ({
-    user: req.user,
+    session: req.session, // Truyền session vào context Apollo từ req.session
+    user: req.session.token ? jwt.decode(req.session.token) : null, // Giải mã token từ session nếu có
   }),
 });
 
@@ -29,7 +42,6 @@ const server = new ApolloServer({
 app.use(
   cors({
     origin: [
-      "http://localhost:4000/graphql/account",
       "http://localhost:5173", // Địa chỉ front-end
       "https://studio.apollographql.com", // Thêm địa chỉ Apollo Studio
     ],

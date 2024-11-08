@@ -6,6 +6,16 @@ import { AuthContext } from "../../context/AuthContext";
 
 import NavbarToggle from "./NavbarToggle/NavbarToggle";
 import NavBarRight from "./NavbarRight/NavBarRight";
+import { gql,useMutaion } from "@apollo/client";
+
+const LOGOUT_MUTATION = gql`
+mutation logoutAccount
+(
+$token
+){
+  logout(token: $token) {
+    isLoggedIn
+  }}`
 
 interface NavbarProps {
   setShowLogin: (show: boolean) => void;

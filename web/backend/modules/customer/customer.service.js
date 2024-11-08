@@ -8,30 +8,7 @@ export const createCustomer = async (data) => {
   return await saveCustomer(newCustomer);
 };
 
-export const findCustomerAccountId = async (accountId) => {
-  try {
-    console.log(accountId);
-    const accountObjectId = mongoose.Types.ObjectId(accountId);
-    console.log(accountObjectId);
-    // Kiểm tra accountId có hợp lệ hay không
-    if (!mongoose.Types.ObjectId.isValid(accountId)) {
-      throw new Error("Invalid accountId format");
-    }
-    // Tìm khách hàng theo accountId
-    const customer = await Customer.find({
-      account_id: accountObjectId,
-    }).select("name account_id");
 
-    if (!customer) {
-      throw new Error("Customer not found");
-    }
-
-    return customer; // Trả về đối tượng khách hàng nếu tìm thấy
-  } catch (error) {
-    console.error("Error finding customer:", error);
-    throw new Error("Error finding customer");
-  }
-};
 
 export const findCustomerName = async (name) => {
   const customer = await Customer.findOne({ name: name });

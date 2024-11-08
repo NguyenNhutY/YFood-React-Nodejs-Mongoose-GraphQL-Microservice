@@ -4,33 +4,10 @@ import MaterialModel from "../data/models/MaterialModel";
 // types.ts
 
 // Định nghĩa kiểu dữ liệu cho các thông tin tài liệu
-export interface MaterialInput {
-  title: string;
-  description?: string;
-  category: string;
-  supplier: string;
-  price: number;
-  quantity: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-
-// Định nghĩa các tham số truy vấn cho việc tìm kiếm và lọc
-export interface MaterialQueryParams {
-  title?: string;
-  category?: string;
-  supplier?: string;
-  minPrice?: string;
-  maxPrice?: string;
-  minQuantity?: string;
-  maxQuantity?: string;
-}
 
 // Lấy tất cả tài liệu
-export const getAllMaterials = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getAllMaterials = async () => 
+ {
   try {
     const materials = await MaterialModel.find();
     res.status(200).json(materials);
@@ -40,10 +17,8 @@ export const getAllMaterials = async (
 };
 
 // Lấy tài liệu theo ID
-export const getMaterialById = async (
-  req: Request<{ id: string }>,
-  res: Response
-): Promise<void> => {
+export const getMaterialById = async ()=>
+{
   try {
     const material = await MaterialModel.findById(req.params.id);
     if (!material) {
@@ -56,10 +31,7 @@ export const getMaterialById = async (
 };
 
 // Thêm tài liệu mới
-export const addMaterial = async (
-  req: Request<{}, {}, MaterialInput>,
-  res: Response
-): Promise<void> => {
+export const addMaterial = async () => {
   try {
     const newMaterial = new MaterialModel(req.body);
     await newMaterial.save();
@@ -70,10 +42,7 @@ export const addMaterial = async (
 };
 
 // Cập nhật tài liệu
-export const updateMaterial = async (
-  req: Request<{ id: string }, {}, MaterialInput>,
-  res: Response
-): Promise<void> => {
+export const updateMaterial = async ()=> {
   try {
     const updatedMaterial = await MaterialModel.findByIdAndUpdate(
       req.params.id,
@@ -90,10 +59,7 @@ export const updateMaterial = async (
 };
 
 // Xóa tài liệu
-export const deleteMaterial = async (
-  req: Request<{ id: string }>,
-  res: Response
-): Promise<void> => {
+export const deleteMaterial = async ()=> {
   try {
     const material = await MaterialModel.findByIdAndDelete(req.params.id);
     if (!material) {
@@ -106,10 +72,7 @@ export const deleteMaterial = async (
 };
 
 // Lấy tài liệu theo danh mục
-export const getMaterialsByCategory = async (
-  req: Request<{ category: string }>,
-  res: Response
-): Promise<void> => {
+export const getMaterialsByCategory = async ()=> {
   try {
     const materials = await MaterialModel.find({
       category: req.params.category,
@@ -121,10 +84,7 @@ export const getMaterialsByCategory = async (
 };
 
 // Lấy tài liệu theo nhà cung cấp
-export const getMaterialsBySupplier = async (
-  req: Request<{ supplier: string }>,
-  res: Response
-): Promise<void> => {
+export const getMaterialsBySupplier = async () => {
   try {
     const materials = await MaterialModel.find({
       supplier: req.params.supplier,
@@ -136,10 +96,7 @@ export const getMaterialsBySupplier = async (
 };
 
 // Tìm tài liệu theo tiêu đề
-export const searchMaterialsByTitle = async (
-  req: Request<{}, {}, {}, { title?: string }>,
-  res: Response
-): Promise<void> => {
+export const searchMaterialsByTitle = async () => {
   try {
     const { title } = req.query;
     const materials = await MaterialModel.find({
@@ -152,10 +109,7 @@ export const searchMaterialsByTitle = async (
 };
 
 // Lấy tài liệu được thêm gần đây
-export const getRecentlyAddedMaterials = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getRecentlyAddedMaterials = async () => {
   try {
     const materials = await MaterialModel.find()
       .sort({ createdAt: -1 })
@@ -169,10 +123,7 @@ export const getRecentlyAddedMaterials = async (
 };
 
 // Lấy tài liệu còn hàng
-export const getMaterialsInStock = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getMaterialsInStock = async ()=> {
   try {
     const materials = await MaterialModel.find({ quantity: { $gt: 0 } });
     res.status(200).json(materials);
@@ -184,10 +135,7 @@ export const getMaterialsInStock = async (
 };
 
 // Lấy tài liệu hết hàng
-export const getMaterialsOutofStock = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getMaterialsOutofStock = async ()=> {
   try {
     const materials = await MaterialModel.find({ quantity: { $lte: 0 } });
     res.status(200).json(materials);
@@ -199,10 +147,7 @@ export const getMaterialsOutofStock = async (
 };
 
 // Lấy tài liệu theo khoảng giá
-export const getMaterialsByPriceRange = async (
-  req: Request<{}, {}, {}, { minPrice?: string; maxPrice?: string }>,
-  res: Response
-): Promise<void> => {
+export const getMaterialsByPriceRange = async () => {
   try {
     const { minPrice, maxPrice } = req.query;
     const materials = await MaterialModel.find({
@@ -220,10 +165,7 @@ export const getMaterialsByPriceRange = async (
 };
 
 // Lấy tài liệu theo khoảng số lượng
-export const getMaterialsByQuantityRange = async (
-  req: Request<{}, {}, {}, { minQuantity?: string; maxQuantity?: string }>,
-  res: Response
-): Promise<void> => {
+export const getMaterialsByQuantityRange = async ()=> {
   try {
     const { minQuantity, maxQuantity } = req.query;
     const materials = await MaterialModel.find({
