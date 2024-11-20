@@ -1,11 +1,17 @@
 import e from "express";
 import Employee from "./employee.model.js";
 
+export const createNewEmployee = (data) => {
+
+  return new Employee(data);
+  
+};
 // Các phương thức khác cho Employee
 export const createEmployee = async (data) => {
   // Xác thực dữ liệu khách hàng
 
-  const newEmployee = createNewEmployee(data);
+  const newEmployee =  createNewEmployee(data);
+
   return await saveEmployee(newEmployee);
 };
 // Assuming you're using MongoDB with Mongoose
@@ -55,7 +61,7 @@ export const findEmployeeHireDate = async () => {
 };
 
 export const EmployeeService = {
-  findEmployeeAccountId,
+  
   createEmployee,
   updateEmployee,
   deleteEmployee,

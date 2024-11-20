@@ -9,7 +9,22 @@ import Material_Batch from "../material_batch/material_batch.model.js";
 
 const foodResolver = {
   Query: {
-
+    listFood:async (_,{}) => {
+      try {
+        const foods = await foodModel.find({});
+        res.json({ success: true, data: foods, mesage:"List Food Successly" });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error" });
+      }
+    },
+    searchFood: async (_, { searchQuery }) => {
+      try {
+        const foods = await Food.find({ name: { $regex: searchQuery, $options: "i" } });
+        return { success: true, data: foods };
+      } catch (error) {
+        throw new ApolloError("Failed to search foods");
+      }},
      getFoodById : async (_,{_id}) => {
         try {
           const food = await Food.findById(_id);
@@ -17,6 +32,7 @@ const foodResolver = {
             return {
                 success: true,
                 data: food,
+                message: "Get Food By ID successfully"
               };
            }
            else {
@@ -28,7 +44,7 @@ const foodResolver = {
         }
       },
       
-    getFoodByCategory = async () => {
+    getFoodByCategory : async () => {
         try {
           const foods = await Categories.find({  });
           res.json({ success: true, data: foods });
@@ -39,106 +55,46 @@ const foodResolver = {
       },
   },
   Mutation: {
-addFood: async () => {
-        console.log("Request body:", req.body);
-        const foodsArray = req.body;
-        if (!Array.isArray(foodsArray) || foodsArray.length === 0) {
-          res.status(400).json({
-            success: false,
-            message: "Invalid input: Expected an array of food objects",
-          });
-          return;
+
+      addMultipleFoods: async (_, { foods }) => {
+        // Kiểm tra danh sách thực phẩm
+        const invalidFoods = Food.filter((food) => {
+          return (
+            !food._id ||
+            !food.name ||
+            !food.price ||
+            !food.description
+          );
+        });
+  
+        if (invalidFoods.length > 0) {
+          throw new Error(
+            `Invalid food items: ${invalidFoods.map((f) => f.name || "unknown").join(", ")}`
+          );
         }
+  
         try {
-          for (const foodData of foodsArray) {
-            const {
-              name,
-              description,
-              price,
-              category,
-              _id,
-              image,
-              metail_1,
-              metail_2,
-              metail_3,
-            } = foodData;
-      
-            if (!_id) {
-              res.status(400).json({
-                success: false,
-                message: "_id is required",
-              });
-              return;
-            }
-            if (!name) {
-              res.status(400).json({
-                success: false,
-                message: "Name is required",
-              });
-              return;
-            }
-            if (!image) {
-              res.status(400).json({
-                success: false,
-                message: "Image is required",
-              });
-              return;
-            }
-            if (!price) {
-              res.status(400).json({
-                success: false,
-                message: "Price is required",
-              });
-              return;
-            }
-            if (!description) {
-              res.status(400).json({
-                success: false,
-                message: "Description is required",
-              });
-              return;
-            }
-            if (!category) {
-              res.status(400).json({
-                success: false,
-                message: "Category is required",
-              });
-              return;
-            }
-      
-            const food = new foodModel({
-              _id,
-              name,
-              description,
-              price,
-              category,
-              image,
-              metail_1,
-              metail_2,
-              metail_3,
+          // Lưu thực phẩm vào cơ sở dữ liệu
+          const foodPromises = foods.map((foodData) => {
+            const food = new FoodModel({
+              _id: foodData._id,
+              name: foodData.name,
+              description: foodData.description,
+              price: foodData.price,
             });
-            await food.save();
-          }
-          res.json({ success: true });
+            return food.save();
+          });
+          const savedFoods = await Promise.all(foodPromises); // Thực hiện lưu đồng thời
+          return savedFoods;
         } catch (error) {
-          console.error(error);
-          res
-            .status(500)
-            .json({ success: false, message: "Failed to save food items" });
+          console.error("Error adding foods:", error);
+          throw new Error("Failed to add foods");
         }
       },
+    
       
-    listFood = async () => {
-        try {
-          const foods = await foodModel.find({});
-          res.json({ success: true, data: foods });
-        } catch (error) {
-          console.error(error);
-          res.status(500).json({ success: false, message: "Error" });
-        }
-      },
-      
-    removeFood = async () => {
+
+    removeFood : async () => {
         try {
           const food = await foodModel.findById(req.body._id);
           if (food?.image) {
@@ -152,7 +108,7 @@ addFood: async () => {
         }
       },
       
-    updateFood = async () => {
+    updateFood : async () => {
         try {
           const food = await foodModel.findById(req.body._id);
           if (req.file) {
@@ -181,7 +137,7 @@ addFood: async () => {
       },
       
       
-    searchFood = async () => {
+    searchFood : async () => {
         try {
           const searchQuery = req.query.search || "";
           if (!searchQuery.trim()) {
@@ -200,7 +156,7 @@ addFood: async () => {
         }
       },
       
- countFood = async () => {
+ countFood : async () => {
         try {
           const count = await foodModel.countDocuments({});
           res.json({ success: true, count });
@@ -210,7 +166,7 @@ addFood: async () => {
         }
       },
       
-    averageFood = async () => {
+    averageFood : async () => {
         try {
           const result = await foodModel.aggregate([
             {
@@ -227,7 +183,7 @@ addFood: async () => {
         }
       },
       
-    groupedFood = async () => {
+    groupedFood : async () => {
         try {
           const result = await foodModel.aggregate([
             {
@@ -244,7 +200,7 @@ addFood: async () => {
         }
       },
       
-      filterFood = async () => {
+      filterFood : async () => {
         const { minPrice, maxPrice, category } = req.query;
         try {
           const query = {};
@@ -259,7 +215,7 @@ addFood: async () => {
         }
       },
       
-    sortFood = async () => {
+    sortFood : async () => {
         const { sortBy, order } = req.query;
         try {
           const sortOptions = {};
@@ -272,7 +228,7 @@ addFood: async () => {
         }
       },
       
-    paginateFood = async () => {
+    paginateFood : async () => {
         try {
           const page = parseInt(req.query.page, 10) || 1;
           const limit = parseInt(req.query.limit, 10) || 10;
@@ -299,7 +255,7 @@ addFood: async () => {
         }
       },
       
-    recommendFood = async () => {
+    recommendFood : async () => {
         const { category } = req.query;
       
         try {
@@ -325,4 +281,4 @@ addFood: async () => {
   }
 }
 
-export default customerResolver;
+export default foodResolver;

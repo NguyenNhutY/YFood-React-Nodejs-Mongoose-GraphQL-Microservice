@@ -1,23 +1,25 @@
 import { createEmployee } from "../../employee/employee.service.js";
 import { createCustomer } from "../../customer/customer.service.js";
-import UserCheckEmail from "../behavioral/userCheckEmail.js";
 
 class UserCreateFactory {
-  static async createUser(name, email, isEmployee, _id) {
-    // Kiểm tra xem email đã tồn tại chưa
-
-    // Tạo đối tượng dựa trên loại tài khoản
-    const creator = UserCreateFactory.getUserCreator(isEmployee);
-
-    // Tạo người dùng và trả về dữ liệu
+  static async createUser(name, role_account, _id) {
+    const creator = UserCreateFactory.getUserCreator(role_account);
+    if (!creator) {
+      throw new Error(`Unsupported role_account: ${role_account}`);
+    }
     const createdUser = await creator.create({ name: name, account_id: _id });
     return createdUser;
   }
-  static getUserCreator(isEmployee) {
-    if (isEmployee) {
+
+  static getUserCreator(role_account) {
+    
+    if (role_account === "employee") {
       return new EmployeeUserCreator();
+    } else if (role_account === "customer") {
+      return new CustomerUserCreator();
+    }else {
+      throw new Error(`Unsupported role_account: ${role_account}`);
     }
-    return new CustomerUserCreator();
   }
 }
 
@@ -40,6 +42,15 @@ class CustomerUserCreator extends UserCreator {
   async create(data) {
     const customer = await createCustomer(data);
     return customer;
+  }
+}
+
+// AdminUserCreator: Tạo cả nhân viên và khách hàng nếu là admin
+class AdminUserCreator extends UserCreator {
+  async create(data) {
+    const employee = await createEmployee(data);
+    const customer = await createCustomer(data);
+    return { employee, customer };
   }
 }
 

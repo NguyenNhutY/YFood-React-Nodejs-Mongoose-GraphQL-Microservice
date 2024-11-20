@@ -7,12 +7,12 @@ const foodSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
+  createDate:{type: Date,default: new Date},
   description: { type: String, required: true },
   price: { type: Decimal128, required: true }, // Corrected typo from "requred" to "required"
-  image: { type: String, required: true },
+  image: { type: String},
   // item_cart_id: { type: mongoose.Schema.Types.ObjectI, default: null },
-  metarial_id: { type: mongoose.Schema.Types.ObjectId, ref: "Meterial" },
+  item_metarial_food_id: { type: mongoose.Schema.Types.ObjectId, ref: "Meterial" },
   // employee_acctive_id: {
   //   type: mongoose.Schema.Types.ObjectId,
   //   ref: "Employee_Active",
@@ -27,7 +27,7 @@ const foodModel = mongoose.models.Food || mongoose.model("Food", foodSchema);
 const getFoodDetails = (food_id) => {
   return foodModel
     .findById(food_id)
-    .populate("metarial_id")
+    .populate("item_metarial_food_id")
     .populate("category_id"); // Corrected typo from "requred" to "required"
   // .polulate("item_cart_id")
   // .polulate("employee_active")

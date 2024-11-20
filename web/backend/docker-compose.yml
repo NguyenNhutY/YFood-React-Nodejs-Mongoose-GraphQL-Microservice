@@ -1,8 +1,21 @@
-version: '3'
+version: "3"
 services:
-  account:
-    build:
-      context: ./account
+  backend-api-gateway:
+    image: backend-api-gateway
+    build: .
+    
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+
+  material_batch:
+    image: material-batch-service-image  # Kiểm tra xem image này có đúng không
+    build: ./modules/material_batch
     ports:
       - "4001:4001"
-
+  account:
+    image: account-service-image  # Kiểm tra xem image này có đúng không
+    build: ./modules/account
+    ports:
+      - "4002:4002"

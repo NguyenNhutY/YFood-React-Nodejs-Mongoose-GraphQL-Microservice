@@ -1,18 +1,2 @@
-# Dockerfile cho module account
-FROM node:14
-
-# Tạo thư mục ứng dụng
-WORKDIR /usr/src/app
-
-# Sao chép package.json và cài đặt phụ thuộc
-COPY package*.json ./
-RUN npm install
-
-# Sao chép mã nguồn vào container
-COPY . .
-
-# Mở cổng cho ứng dụng
-EXPOSE 4001
-
-# Khởi động server
-CMD ["node", "index.js"]
+node_modules
+npm-debug.log

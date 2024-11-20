@@ -4,7 +4,8 @@ import { ApolloError } from "apollo-server-errors";
 import Account, { getAccountDetails } from "./account.model.js"; // Assuming an Account model is used
 import Customer from "../customer/customer.model.js";
 import Employee from "../employee/employee.model.js";
-import UserFinderFactory from "./creational/user.finder.factory.js";
+// import UserFinderFactory from "./creational/user.finder.factory.js";
+import jwt from "jsonwebtoken"
 
 class AccountService {
   static async createAccount(email, hashedPassword, role_account) {
@@ -18,120 +19,106 @@ class AccountService {
   }
 
   static async linkUserToAccount(account, createdUser, role_account) {
-    if (role_account == "employee") {
+    if (role_account == "employee" ) {
       account.employee_id = createdUser._id;
-    } else if (role_account == "customer") {
+    } else if (role_account == "customer" ) {
       account.customer_id = createdUser._id;
-    } else if (role_account == "admin") {
-      account.employee_id = createdUser._id;
-      account.customer_id = createdUser._id;
+    }else if (role_account == "admin"){
+    account.employee_id = createdUser._id;
+    account.customer_id = createdUser._id;
+    
     } else {
       throw new Error("Invalid role");
     }
     await account.save();
   }
 
-  static getAccountResponse(account, user, role_account) {
-    {
-      const accountDetails = getAccountDetails(account._id);
+    static getAccountResponse(account, user) {
+      {
 
-      return {
-        _id: account._id,
-        email: account.email,
-        role_account: account.role_account,
-        name: user.name,
-        account_id_in_user: user.account_id,
-        employee_id: isEmployee ? user._id : null,
-        customer_id: !isEmployee ? user._id : null,
-        token: jwt.sign({ _id: account._id }, "secret-key", {
-          expiresIn: "1h",
-        }),
-        account: accountDetails,
-      };
+        return {
+
+        dataUser: user,
+        dataAccount: account,
+          success: true,
+          message:"Account Response successfully",
+          token: jwt.sign({ email: account.email }, "secret-key", {
+            expiresIn: "1h",
+          }),
+       
+        };
+      }
+    }
+  static async findAccountId(_id) {
+    try {
+      // Tìm nhân viên theo accountId
+      const account = await Employee.findOne({ _id: _id }).exec();
+
+      if (!account) {
+        throw new Error("Employee not found");
+      }
+
+      return {    dataAccount: account,success:"true",message:"Find Account By Id Successly"}; // Trả về đối tượng nhân viên nếu tìm thấy
+    } catch (error) {
+      console.error("Error finding account:", error);
+      throw new Error("Error finding account");
     }
   }
-//   static async findEmployeeAccountId(accountId) {
-//     try {
-//       // Tìm nhân viên theo accountId
-//       const employee = await Employee.findOne({ account_id: accountId }).exec();
 
-//       if (!employee) {
-//         throw new Error("Employee not found");
-//       }
+  static async findAccountByEmail(email) {
+    const account = await Account.findOne({ email:email });
+    if (!account) {
+      throw new ApolloError("Account not found", "ACCOUNT_NOT_FOUND");
+    }
+    return {
+      dataAccount: account,
+      success: true,
+      message:"Get Account By Email"
+    }
+  }
 
-//       return employee; // Trả về đối tượng nhân viên nếu tìm thấy
-//     } catch (error) {
-//       console.error("Error finding employee:", error);
-//       throw new Error("Error finding employee");
-//     }
-//   }
+  static async findAllAccountsByRoleAccount  (role_account)  {
+    const accounts = await Account.find({ role_account: role_account })
+    return {dataAccount: accounts, success:true, message: "Get All Accounts by Role Account successfully"};
+  }
 
-//   static async findCustomerAccountId(accountId) {
-//     try {
-//       console.log(accountId);
-//       const accountObjectId = mongoose.Types.ObjectId(accountId);
-//       console.log(accountObjectId);
-//       // Kiểm tra accountId có hợp lệ hay không
-//       if (!mongoose.Types.ObjectId.isValid(accountId)) {
-//         throw new Error("Invalid accountId format");
-//       }
-//       // Tìm khách hàng theo accountId
-//       const customer = await Customer.findOne({
-//         account_id: accountObjectId,
-//       }).select("name account_id");
+  static async findAllAccounts(){
+    const accounts = await Account.find().exec()
+    return {dataAccount: accounts, success:true, message: "Get All Accounts successfully"};
+  }
 
-//       if (!customer) {
-//         throw new Error("Customer not found");
-//       }
+  static async findAccountByToken (token){
+    const decoded = jwt.verify(token, "secret-key");
+    const account = await Account.findById(decoded.email).exec();
+    if (!account) {
+      throw new ApolloError("Invalid token", "INVALID_TOKEN");
+    }
+    return {account, success:true, message: "Get Account By Token successfully"};
+  }
 
-//       return customer; // Trả về đối tượng khách hàng nếu tìm thấy
-//     } catch (error) {
-//       console.error("Error finding customer:", error);
-//       throw new Error("Error finding customer");
-//     }
-//   }
-
-//   static async findAccountId(_id) {
-//     return (admin = await Account.findOne({ _id: _id }).exec());
-//   }
+  static async updateAccount(_id, updated_account) {
+    const account = await Account.findByIdAndUpdate(
+      _id,
+      updated_account,
+      { new: true }
+    ).exec();
+    if (!account) {
+      throw new ApolloError("Account not found", "ACCOUNT_NOT_FOUND");
+    }
+    return {dataAccount: account, sucess:true, message: "Account updated successfully"};
+  }
 
 
-//   static async findEmployeeAccountId(accountId) {
-//     try {
-//       // Tìm nhân viên theo accountId
-//       const employee = await Employee.findOne({ account_id: accountId }).exec();
+static async deleteAccount(_id) {
+  const account = await Account.findByIdandDelete(_id)
+  return { success:true, message: "Account deleted"};
+}
 
-//       if (!employee) {
-//         throw new Error("Employee not found");
-//       }
+static async deleteTokenAccount(token){
+  const decoded = jwt.verify(token, "secret-key");
+  const account = await Account.findByIdAndDelete(decoded._id)
+  return { success:true, message: "Account deleted"};
+}
 
-//       return employee; // Trả về đối tượng nhân viên nếu tìm thấy
-//     } catch (error) {
-//       console.error("Error finding employee:", error);
-//       throw new Error("Error finding employee");
-//     }
-//   }
-
-//   static async findEmployeeAccount (role_account){
-//     return admin = await Account.findOne ({role_account: role_account})
-//   }
-
-//   static async findAccountByEmail(email) {
-//     const account = await Account.findOne({ email:email });
-//     if (!account) {
-//       throw new ApolloError("Account not found", "ACCOUNT_NOT_FOUND");
-//     }
-//     return account;
-//   }
-//   static async findUserByEmail(email) {
-//     const account = await Account.findOne({ email });
-//     if (!account) {
-//       throw new ApolloError("User not found", "USER_NOT_FOUND");
-//     }
-//     coonsole.log("Account" + account);
-//     const account_id = account._id;
-//     console.log(account_id);
-//   }
-// }
-
+}
 export default AccountService;

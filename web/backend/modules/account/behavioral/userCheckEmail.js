@@ -1,4 +1,3 @@
-import UserFinderFactory from "../creational/user.finder.factory.js";
 import Account from "../account.model.js";
 
 class UserCheckEmail {

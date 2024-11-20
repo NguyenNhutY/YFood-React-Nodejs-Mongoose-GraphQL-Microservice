@@ -6,12 +6,22 @@
   "editor.cursorSmoothCaretAnimation": "off",
   "editor.smoothScrolling": false,
   "editor.largeFileOptimizations": true,
-  "files.autoSave": "afterDelay",
+  "files.autoSave": "off",
   "files.autoSaveDelay": 1000,
+"git.enabled": true,
+
   "editor.quickSuggestions": {
     "comments": "off",
     "strings": "off",
     "other": "off"
   },
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true,
+    "**/node_modules/**": true
+} 
+
 }

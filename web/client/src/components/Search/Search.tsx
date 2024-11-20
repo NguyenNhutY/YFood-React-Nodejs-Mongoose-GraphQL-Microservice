@@ -129,35 +129,35 @@ const Search: React.FC<SearchProps> = ({ setSearchName, onClose }) => {
           className='suggestions-list'
           ref={suggestionsRef} // Tham chiếu đến phần tử danh sách gợi ý
         >
-          {inputRef.current.length === 0 && selectedItems.length > 0 ? (
-            selectedItems.map((item, index) => (
-              <div key={index} className='suggestion-item'>
-                <a
-                  href='#food-display'
-                  className='suggestion-item'
-                  onClick={() => handleSuggestionClick(item)}
-                  aria-label={`Search for ${item}`} // Corrected here
-                >
-                  {item}
-                </a>
-              </div>
-            ))
-          ) : suggestions.length > 0 ? (
-            suggestions.map((item) => (
-              <div key={item.id} className='suggestion-item'>
-                <a
-                  href='#food-display'
-                  className='suggestion-item'
-                  onClick={() => handleSuggestionClick(item.name)}
-                  aria-label={`Search for ${item.name}`} // Corrected here
-                >
-                  {item.name}
-                </a>
-              </div>
-            ))
-          ) : (
-            <div className='suggestion-item'>No suggestions</div>
-          )}
+  {inputRef.current.length === 0 && selectedItems.length > 0 ? (
+  selectedItems.map((item, index) => (
+    <div key={index} className='suggestion-item'>
+      <a
+        href='#food-display'
+        className='suggestion-item'
+        onClick={() => handleSuggestionClick(item)}
+        aria-label={`Search for ${item}`}
+      >
+        {item}
+      </a>
+    </div>
+  ))
+) : suggestions.length > 0 ? (
+  suggestions.map((item) => (
+    <div key={item.id} className='suggestion-item'>
+      <a
+        href='#food-display'
+        className='suggestion-item'
+        onClick={() => handleSuggestionClick(item.name)}
+        aria-label={`Search for ${item.name}`}
+      >
+        {item.name}
+      </a>
+    </div>
+  ))
+) : (
+  <div className='suggestion-item'>No suggestions</div>
+)}
         </div>
       )}
     </div>

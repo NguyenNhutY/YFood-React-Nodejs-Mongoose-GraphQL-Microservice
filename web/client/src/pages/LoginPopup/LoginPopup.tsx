@@ -198,7 +198,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
                   id='password-input'
                   placeholder='Your password'
                   as={SecurityInput}
-                  onChange={(e) => {
+                  onChange={(e:any) => {
                     const value = e.target.value;
                     setFieldValue("password", value);
                     validatePassword(value);
@@ -350,7 +350,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
       {showPasswordGenerator && (
         <PassGenerator
           onPasswordGenerated={(password: string) => {
-            setFieldValue("password", password);
+
             setShowPasswordGenerator(false);
           }}
           onClose={() => setShowPasswordGenerator(false)}

@@ -46,6 +46,7 @@
     "intro.js-react": "^1.0.0",
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
     "postcss-preset-env": "^10.0.0",
     "quill": "^2.0.2",
     "quill-image-drop-module": "^1.0.3",

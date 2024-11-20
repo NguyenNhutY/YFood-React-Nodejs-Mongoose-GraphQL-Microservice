@@ -43,7 +43,6 @@ export const CustomerService = {
   createCustomer,
   updateCustomer,
   deleteCustomer,
-  findCustomerAccountId,
   getAllCustomers,
 };
 

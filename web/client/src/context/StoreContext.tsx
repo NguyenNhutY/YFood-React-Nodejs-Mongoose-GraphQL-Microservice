@@ -5,7 +5,7 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import { food_list as initialFoodList } from "../assets/frontend_assets/assets";
+import { food_list as initialFoodList } from "../assets/frontend_assets/assets.js";
 import promoCodesData from "../../../backend/types/promoCodes.json";
 import { PromoCodeTrie } from "../structure/PromoCodeTrie";
 import { ForbiddenWordsTree } from "../structure/ForbiddenWordsTree";

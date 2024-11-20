@@ -2,19 +2,15 @@ import mongoose from "mongoose";
 
 const accountSchema = new mongoose.Schema(
   {
-    status: { type: String, default: "active" },
 
     createdAt: {
       type: Date,
       default: Date.now,
     },
-    resetPasswordToken: { type: String, default: null },
-    resetPasswordExpires: { type: Date, default: new Date() },
-
     email: { type: String, required: true, unique: true },
     role_account: {
       type: String,
-      enum: ["admin", "employee", "customer"],
+      enum: [ "employee", "customer"],
       default: null,
     },
     password: { type: String, required: true, default: null },

@@ -5,7 +5,7 @@ const customerSchema = new mongoose.Schema(
     phone: { type: String, default: null },
     age: { type: Number, min: 18, default: null },
     avatar: { type: String, default: null },
-
+    
     gender: { type: String, default: null },
     birth_date: { type: Date, default: null },
     name: { type: "String", required: "true", default: null },
