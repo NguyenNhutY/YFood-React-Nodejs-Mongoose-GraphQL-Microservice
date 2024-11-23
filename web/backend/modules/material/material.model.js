@@ -2,9 +2,8 @@ import mongoose from "mongoose"; // Corrected import from "mongose" to "mongoose
 
 // Định nghĩa schema cho nguyên liệu
 const materialSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  item_material_id: { type: mongoose.Schema.Types.ObjectId, default: null },
+  name: { type: String, required: true,unique:true },
+  description: { type: String ,required: false},
 });
 
 // Tạo model từ schema

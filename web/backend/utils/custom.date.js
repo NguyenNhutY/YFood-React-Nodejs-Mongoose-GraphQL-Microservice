@@ -2,7 +2,7 @@ import { GraphQLScalarType } from "graphql";
 
 export const DateScalar = new GraphQLScalarType({
   name: "Date",
-  description: "Một chuỗi ngày theo định dạng YYYY-MM-DD",
+  description: "Một chuỗi ngày theo định dạng DD-MM-YYYY",
   parseValue(value) {
     return new Date(value); // Chuyển đổi số nguyên đến từ client thành Date
   },

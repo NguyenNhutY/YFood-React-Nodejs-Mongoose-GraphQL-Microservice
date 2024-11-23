@@ -19,12 +19,16 @@ const gateway = new ApolloGateway({
     subgraphs: [
       {
         name: 'accounts',
-        url: 'http://127.0.0.1:4001/graphql',  // Ensure this URL is correct
+        url: 'http://localhost:4001/graphql',  // Ensure this URL is correct
       },
       {
         name: 'materialBatches',
-        url: 'http://127.0.0.1:4002/graphql',
+        url: 'http://localhost:4002/graphql',
       },
+      {
+        name: 'material',
+        url: 'http://localhost:4003/graphql',
+      }
     ],
     introspection: true, // Giữ introspection để có thể truy vấn schema từ localhost
     playground: true,    // Bật GraphQL Playground ở localhost

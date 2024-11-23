@@ -1,37 +1,27 @@
-// model logic for Folder4import mongoose from "mongoose"; // Corrected import from "mongose" to "mongoose"
 import mongoose from "mongoose";
-import { Decimal128 } from "bson";
 
+// Định nghĩa schema cho món ăn (Food)
 const foodSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  createDate:{type: Date,default: new Date},
+  createDate: { type: Date, default: Date.now }, // Sử dụng Date.now để tạo ngày mặc định
   description: { type: String, required: true },
-  price: { type: Decimal128, required: true }, // Corrected typo from "requred" to "required"
-  image: { type: String},
-  // item_cart_id: { type: mongoose.Schema.Types.ObjectI, default: null },
-  item_metarial_food_id: { type: mongoose.Schema.Types.ObjectId, ref: "Meterial" },
-  // employee_acctive_id: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Employee_Active",
-  // }, // Khóa ngoại để liên kết với Account
-  // item_order_id: { type: mongoose.Schema.Types.ObjectId, ref: "Item_Order" },
-  category_id: { type: mongoose.Schema.Types.ObjectId, ref: "Category" }, // Khóa ngoại để liên kết với Account
-  // material_name: { type: String, required: true },
-});
+  price: { type: Number, required: true }, // Sử dụng Decimal128 nếu cần độ chính xác cao cho giá trị
+  image: { type: String }, // Nếu có trường hình ảnh
+  item_metarial_food_id: { type: mongoose.Schema.Types.ObjectId, ref: "item_material_food" },
+  category_id: { type: mongoose.Schema.Types.ObjectId, ref: "Category" }, // Đảm bảo Category đã được khai báo trong MongoDB
+},{collections:"foods"});
 
-const foodModel = mongoose.models.Food || mongoose.model("Food", foodSchema);
+// Tạo model Food từ foodSchema
+const Food = mongoose.model('Food', foodSchema);
 
+// Hàm để lấy thông tin chi tiết món ăn, bao gồm populate
 const getFoodDetails = (food_id) => {
-  return foodModel
-    .findById(food_id)
-    .populate("item_metarial_food_id")
-    .populate("category_id"); // Corrected typo from "requred" to "required"
-  // .polulate("item_cart_id")
-  // .polulate("employee_active")
-  // .polulate("item_order_id")
+  return Food.findById(food_id)
+    .populate("item_metarial_food_id")  // Liên kết với Meterial
+    .populate("category_id");           // Liên kết với Category
 };
 
 export { getFoodDetails };

@@ -21,8 +21,11 @@ export const connectDB = async () => {
   try {
     console.log("Đang kết nối tới MongoDB...");
     await mongoose.connect(process.env.URL_MONGO, {
-      ssl: true, // SSL connection (chỉ dùng nếu MongoDB Atlas)
-
+      useNewUrlParser: true, useUnifiedTopology: true,
+      connectTimeoutMS: 10000,        // Thời gian tối đa để kết nối (10 giây)
+      ssl: true, // Sử dụng SSL khi kết nối MongoDB Atlas
+      serverSelectionTimeoutMS: 5000,  // Thời gian tối đa để lựa chọn server (5 giây)
+      socketTimeoutMS: 45000,  // Thời gian chờ khi truy vấn lâu
     });
 
     console.log("Kết nối db thành công");

@@ -4,46 +4,46 @@ import Food from "./food.model.js";
 import Category from "../category/category.model.js";
 import Material from "../material/material.model.js";
 import Material_Batch from "../material_batch/material_batch.model.js";
-import FoodService from "./food.service.js"
+import {uploadFile} from "../../config/couldinaryConfig.js"
+import { createWriteStream } from "fs";
+import cloudinary from "cloudinary";
+import { GraphQLUpload, graphqlUploadExpress  } from 'graphql-upload';
 
-import { GraphQLUpload } from 'graphql-upload';  // Correct scalar import
-
-import fs from 'fs';
 
 const foodResolver = {
+  Upload: GraphQLUpload, // Đăng ký scalar Upload
   Query: {
-    listFood: async (_, {}) => {
-      return await FoodService.listFood();
-     },
-    food: async (_, { searchQuery }) => {
+    listFood:async (_,{}) => {
+      try {
+        const foods = await foodModel.find({});
+        res.json({ success: true, data: foods, mesage:"List Food Successly" });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error" });
+      }
+    },
+    searchFood: async (_, { searchQuery }) => {
       try {
         const foods = await Food.find({ name: { $regex: searchQuery, $options: "i" } });
         return { success: true, data: foods };
       } catch (error) {
         throw new ApolloError("Failed to search foods");
       }},
-      getFoodById: async (_, { _id }) => {
+     getFoodById : async (_,{_id}) => {
         try {
-          // Check if the provided _id is a valid MongoDB ObjectId
-
-          console.log('Querying with _id:', _id);
           const food = await Food.findById(_id);
-          // Fetch food from the database
-
-      
-          // Check if food exists
           if (food) {
             return {
-              success: true,
-              data: food,
-              message: "Get Food By ID successfully",
-            };
-          } else {
-            throw new ApolloError("Food not found", "FOOD_NOT_FOUND");
+                success: true,
+                data: food,
+                message: "Get Food By ID successfully"
+              };
+           }
+           else {
+            throw new ApolloError("Food not found");
           }
         } catch (error) {
-          console.error("Error fetching food by ID:", error);  // Log error for debugging
-          throw new ApolloError("Failed to fetch food", "INTERNAL_ERROR");
+          throw new ApolloError("Failed to fetch food");
         }
       },
     getFoodByCategory : async () => {
@@ -57,38 +57,49 @@ const foodResolver = {
       },
   },
   Mutation: {
-    addFoods: async (_, { name, price, description, image, category_id }) => {
-      if (!image) {
-        throw new ApolloError("Image is required");
-      }
-      if (!name || !price || !description) {
-        throw new ApolloError("All fields are required");
-      }
-    
-      try {
-        // Assuming `image` is a URL from Cloudinary or similar service
-        const newFood = new Food({
-          name,
-          price,
-          description,
-          image, // URL from Cloudinary, for example
-          category_id,
-        });
-        const savedFood = await newFood.save();
-        if (!savedFood) {
-          throw new ApolloError("Failed to save food to database");
+      addFoods: async (_, { _id, name, price, desc, img }) => {
+        // Kiểm tra danh sách thực phẩm
+        if (!img) {
+          throw new ApolloError("Image is required");
         }
-
-        return {
-          success: true,
-          message: "Food added successfully",
-          data: savedFood,
-        };
-      } catch (error) {
-        console.error("Error adding food:", error);
-        throw new ApolloError("Error adding food", error.message);
-      }
-        
+        if (!name) {
+          throw new ApolloError("Name is required");
+        }
+        if (!price) {
+          throw new ApolloError("Price is required");
+        }
+        if (!desc) {
+          throw new ApolloError("Description is required");
+        }
+        try {
+          // Tải lên hình ảnh hoặc video
+          const imgUrl = await uploadFile(img, "../../uploads");  // Giả sử `img` là đường dẫn đến file tải lên từ client
+  
+          // Lưu thông tin món ăn vào cơ sở dữ liệu (MongoDB ví dụ)
+          const newFood = new FoodModel({
+            _id,
+            name,
+            price,
+            description: desc,
+            img: imgUrl, // Lưu URL của hình ảnh đã tải lên
+          });
+  
+          // Lưu món ăn vào DB và trả về kết quả
+          const savedFood = await newFood.save();
+          
+          return {
+            success: true,
+            message: "Food added successfully",
+            data: [savedFood],
+          };
+        } catch (error) {
+          console.error("Error adding food:", error);
+          return {
+            success: false,
+            message: "Error adding food",
+            data: [],
+          };
+        }
       },
     removeFood : async () => {
         try {

@@ -1,0 +1,247 @@
+[
+  {
+    "name": "Cooked Noodles",
+    "image": "https://www.example.com/images/cooked_noodles.jpg",
+    "price": 5.99,
+    "description": "Delicious cooked noodles with a savory sauce",
+    "category_id": null
+  },
+  {
+    "name": "Vegetable Soup",
+    "image": "https://www.example.com/images/vegetable_soup.jpg",
+    "price": 4.49,
+    "description": "Healthy vegetable soup with fresh ingredients",
+    "category_id": null
+  },
+  {
+    "name": "Grilled Chicken",
+    "image": "https://www.example.com/images/grilled_chicken.jpg",
+    "price": 7.99,
+    "description": "Tender grilled chicken served with sides",
+    "category_id": null
+  },
+  {
+    "name": "Beef Burger",
+    "image": "https://www.example.com/images/beef_burger.jpg",
+    "price": 6.49,
+    "description": "Juicy beef burger with fresh lettuce and tomato",
+    "category_id": null
+  },
+  {
+    "name": "Spaghetti Carbonara",
+    "image": "https://www.example.com/images/spaghetti_carbonara.jpg",
+    "price": 8.49,
+    "description": "Classic spaghetti with creamy carbonara sauce",
+    "category_id": null
+  },
+  {
+    "name": "Cooked Noodles",
+    "image": "https://www.example.com/images/cooked_noodles.jpg",
+    "price": 5.99,
+    "description": "Delicious cooked noodles with a savory sauce",
+    "category_id": null
+  },
+  {
+    "name": "Vegetable Soup",
+    "image": "https://www.example.com/images/vegetable_soup.jpg",
+    "price": 4.49,
+    "description": "Healthy vegetable soup with fresh ingredients",
+    "category_id": null
+  },
+  {
+    "name": "Grilled Chicken",
+    "image": "https://www.example.com/images/grilled_chicken.jpg",
+    "price": 7.99,
+    "description": "Tender grilled chicken served with sides",
+    "category_id": null
+  },
+  {
+    "name": "Beef Burger",
+    "image": "https://www.example.com/images/beef_burger.jpg",
+    "price": 6.49,
+    "description": "Juicy beef burger with fresh lettuce and tomato",
+    "category_id": null
+  },
+  {
+    "name": "Spaghetti Carbonara",
+    "image": "https://www.example.com/images/spaghetti_carbonara.jpg",
+    "price": 8.49,
+    "description": "Classic spaghetti with creamy carbonara sauce",
+    "category_id": null
+  },
+  {
+    "name": "Chicken Salad",
+    "image": "https://www.example.com/images/chicken_salad.jpg",
+    "price": 6.99,
+    "description": "Fresh salad with grilled chicken and vinaigrette",
+    "category_id": null
+  },
+  {
+    "name": "Tuna Sandwich",
+    "image": "https://www.example.com/images/tuna_sandwich.jpg",
+    "price": 4.99,
+    "description": "Tasty tuna sandwich with fresh ingredients",
+    "category_id": null
+  },
+  {
+    "name": "Pasta Alfredo",
+    "image": "https://www.example.com/images/pasta_alfredo.jpg",
+    "price": 9.99,
+    "description": "Creamy pasta with rich Alfredo sauce",
+    "category_id": null
+  },
+  {
+    "name": "Margherita Pizza",
+    "image": "https://www.example.com/images/margherita_pizza.jpg",
+    "price": 7.49,
+    "description": "Classic Margherita pizza with fresh mozzarella",
+    "category_id": null
+  },
+  {
+    "name": "Pepperoni Pizza",
+    "image": "https://www.example.com/images/pepperoni_pizza.jpg",
+    "price": 8.99,
+    "description": "Delicious pepperoni pizza with a crispy crust",
+    "category_id": null
+  },
+  {
+    "name": "BBQ Ribs",
+    "image": "https://www.example.com/images/bbq_ribs.jpg",
+    "price": 12.99,
+    "description": "Tender BBQ ribs with smoky flavor",
+    "category_id": null
+  },
+  {
+    "name": "Fish and Chips",
+    "image": "https://www.example.com/images/fish_and_chips.jpg",
+    "price": 10.49,
+    "description": "Crispy fish fillets served with golden fries",
+    "category_id": null
+  },
+  {
+    "name": "Caesar Salad",
+    "image": "https://www.example.com/images/caesar_salad.jpg",
+    "price": 5.99,
+    "description": "Classic Caesar salad with crispy croutons",
+    "category_id": null
+  },
+  {
+    "name": "Chicken Wings",
+    "image": "https://www.example.com/images/chicken_wings.jpg",
+    "price": 6.49,
+    "description": "Spicy and crispy chicken wings",
+    "category_id": null
+  },
+  {
+    "name": "Vegetarian Wrap",
+    "image": "https://www.example.com/images/vegetarian_wrap.jpg",
+    "price": 5.99,
+    "description": "Healthy wrap filled with fresh vegetables",
+    "category_id": null
+  },
+  {
+    "name": "Beef Tacos",
+    "image": "https://www.example.com/images/beef_tacos.jpg",
+    "price": 4.49,
+    "description": "Tasty beef tacos with all the fixings",
+    "category_id": null
+  },
+  {
+    "name": "Chicken Burrito",
+    "image": "https://www.example.com/images/chicken_burrito.jpg",
+    "price": 6.49,
+    "description": "Juicy chicken burrito wrapped in a soft tortilla",
+    "category_id": null
+  },
+  {
+    "name": "Steak Frites",
+    "image": "https://www.example.com/images/steak_frites.jpg",
+    "price": 14.99,
+    "description": "Grilled steak served with crispy fries",
+    "category_id": null
+  },
+  {
+    "name": "Peking Duck",
+    "image": "https://www.example.com/images/peking_duck.jpg",
+    "price": 16.49,
+    "description": "Succulent Peking duck with crispy skin",
+    "category_id": null
+  },
+  {
+    "name": "Lobster Roll",
+    "image": "https://www.example.com/images/lobster_roll.jpg",
+    "price": 18.99,
+    "description": "Delicious lobster roll with butter and lemon",
+    "category_id": null
+  },
+  {
+    "name": "Shrimp Scampi",
+    "image": "https://www.example.com/images/shrimp_scampi.jpg",
+    "price": 12.99,
+    "description": "Shrimp cooked in garlic butter sauce",
+    "category_id": null
+  },
+  {
+    "name": "Pasta Primavera",
+    "image": "https://www.example.com/images/pasta_primavera.jpg",
+    "price": 9.49,
+    "description": "Fresh pasta with seasonal vegetables",
+    "category_id": null
+  },
+  {
+    "name": "Eggplant Parmesan",
+    "image": "https://www.example.com/images/eggplant_parmesan.jpg",
+    "price": 7.99,
+    "description": "Breaded eggplant topped with marinara sauce and cheese",
+    "category_id": null
+  },
+  {
+    "name": "Chicken Parmesan",
+    "image": "https://www.example.com/images/chicken_parmesan.jpg",
+    "price": 8.99,
+    "description": "Crispy chicken topped with marinara sauce and mozzarella",
+    "category_id": null
+  },
+  {
+    "name": "Falafel",
+    "image": "https://www.example.com/images/falafel.jpg",
+    "price": 5.49,
+    "description": "Delicious falafel served with tahini sauce",
+    "category_id": null
+  },
+  {
+    "name": "Cheeseburger",
+    "image": "https://www.example.com/images/cheeseburger.jpg",
+    "price": 6.99,
+    "description": "Juicy cheeseburger with lettuce, tomato, and pickles",
+    "category_id": null
+  },
+  {
+    "name": "Pulled Pork Sandwich",
+    "image": "https://www.example.com/images/pulled_pork_sandwich.jpg",
+    "price": 7.99,
+    "description": "Slow-cooked pulled pork on a soft bun",
+    "category_id": null
+  },
+  {
+    "name": "Chicken Quesadilla",
+    "image": "https://www.example.com/images/chicken_quesadilla.jpg",
+    "price": 5.99,
+    "description": "Grilled quesadilla stuffed with seasoned chicken",
+    "category_id": null
+  },
+  {
+    "name": "Veggie Pizza",
+    "image": "https://www.example.com/images/veggie_pizza.jpg",
+    "price": 7.99,
+    "description": "Delicious veggie pizza with mushrooms, peppers, and olives",
+    "category_id": null
+  },
+  {
+    "name": "Pasta Bolognese",
+    "image": "https://www.example.com/images/pasta_bolognese.jpg",
+    "price": 10.99,
+    "description": "Pasta served with a rich Bolognese sauce",
+    "category_id": null
+  }
+]
