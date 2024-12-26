@@ -14,16 +14,14 @@ import Notification from "../Notification/Notification";
 import { StoreContext } from "../../context/StoreContext"; // Adjust import based on your context file
 import { isDiscountTime, isWeekday } from "../../utils/timeUtils"; // Import the time utilities
 
+
 interface FoodItemProps {
-  id: string;
+  _id: string;
   name: string;
   price: number;
   description: string;
   image: string;
-  detail: string;
-  metail_1: string;
-  metail_2: string;
-  metail_3: string;
+
 }
 
 interface NotificationType {
@@ -33,15 +31,11 @@ interface NotificationType {
 }
 
 const FoodItem: React.FC<FoodItemProps> = ({
-  id,
+  _id,
   name,
   price,
   description,
   image,
-  detail,
-  metail_1,
-  metail_2,
-  metail_3,
 }) => {
   const {
     cartItems,
@@ -80,13 +74,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
     addNotification("Item removed", "error");
   };
 
-  const handleAddToFavorites = (id: string) => {
-    addToFavorites && addToFavorites(id);
-  };
 
-  const handleRemoveFromFavorites = (id: string) => {
-    removeFromFavorites && removeFromFavorites(id);
-  };
 
   const addNotification = (message: string, type: "success" | "error") => {
     setNotifications((prev) => [
@@ -119,15 +107,15 @@ const FoodItem: React.FC<FoodItemProps> = ({
     setShowModalRating((prev) => !prev);
   };
 
-  const cartItem = cartItems[id] || 0;
-  const isFavorite = favoriteItems && favoriteItems.has(id);
+  const cartItem = cartItems[_id] || 0;
+  const isFavorite = favoriteItems && favoriteItems.has(_id);
 
   const discountedPrice =
     isWeekday(currentTime) && isDiscountTime(currentTime) ? price * 0.9 : price;
 
   const handleViewDetailsClick = () => {
     console.log("FoodItem Clicked");
-    navigate(`/product/${id}`); // Chuyển hướng đến trang sản phẩm với ID cụ thể
+    navigate(`/product/${_id}`); // Chuyển hướng đến trang sản phẩm với ID cụ thể
   };
 
   return (
@@ -155,20 +143,20 @@ const FoodItem: React.FC<FoodItemProps> = ({
           {cartItem === 0 ? (
             <img
               className='add'
-              onClick={() => handleAddToCart(id)}
+              onClick={() => handleAddToCart(_id)}
               src={assets.add_icon_white}
               alt='Add to cart'
             />
           ) : (
             <div className='food-item-counter'>
               <img
-                onClick={() => handleDecreaseToCart(id)}
+                onClick={() => handleDecreaseToCart(_id)}
                 src={assets.remove_icon_red}
                 alt='Remove from cart'
               />
               <p>{cartItem}</p>
               <img
-                onClick={() => handleAddToCart(id)}
+                onClick={() => handleAddToCart(_id)}
                 src={assets.add_icon_green}
                 alt='Add to cart'
               />
@@ -180,14 +168,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
             }`}
             src={favorite ? assets.favorite_filled_icon : assets.favorite_icon}
             alt='Toggle favorite'
-            onClick={() => {
-              if (favorite) {
-                handleRemoveFromFavorites(id);
-              } else {
-                handleAddToFavorites(id);
-              }
-              setFavorite(!favorite); // Toggle trạng thái yêu thích
-            }}
+          
           />
         </div>
         <div className='food-item-info'>
@@ -220,7 +201,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
           >
             View Details
           </button>
-          {showModalItem && (
+          {/* {showModalItem && (
             <ModalItem
               detail={detail}
               metail_1={metail_1}
@@ -228,7 +209,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
               metail_3={metail_3}
               onCloseModalItem={toggleModalItem}
             />
-          )}
+          )} */}
         </div>
       </div>
     </>

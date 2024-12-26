@@ -9,10 +9,8 @@ const accountSchema = gql`
     _id: ID!
     email: String!
     password: String!
-    role_account: String!
     createdAt: Date!
-    employee_id: ID
-    customer_id: ID
+    user_id:ID!
   }
 
   # Đối tượng User có @key để định danh bởi _id
@@ -22,17 +20,17 @@ const accountSchema = gql`
   }
 
   # AccountResponse sẽ sử dụng @external cho các trường mà chúng ta muốn lấy từ các subgraph khác
-  type AccountResponse {
-    token: String @external
-    success: Boolean! @external
-    message: String! @external
-
+  type AccountResponse   @key(fields: "_id"){
+    token: String 
+    success: Boolean!
+    message: String! 
+    _id: ID
     # Không nên dùng @external cho _id nếu nó là trường chủ sở hữu trong subgraph này
-    _id: ID! 
+ 
 
     # Các trường cần dữ liệu từ Account và User, sử dụng @requires để yêu cầu _id
-    dataAccount: [Account] @requires(fields: "_id")
-    dataUser: [User] @requires(fields: "_id")
+    dataAccount: [Account] 
+    dataUser: [User] 
   }
 
   # Mở rộng các query hiện có trong schema
@@ -61,7 +59,7 @@ const accountSchema = gql`
       email: String!
       password: String!
       confirmPassword: String!
-      role_account: String!
+      
     ): AccountResponse
     forgotPassword(email: String!): String
     resetPassword(
@@ -72,7 +70,6 @@ const accountSchema = gql`
     logoutAccount(token: String!): AccountResponse
     loginAccount(
       email: String!
-      role_account: String!
       password: String!
     ): AccountResponse
   }

@@ -1,25 +1,38 @@
-import { createEmployee } from "../../employee/employee.service.js";
-import { createCustomer } from "../../customer/customer.service.js";
 
+import User from "../../user/user.model.js"
+import ItemUserPermission from "../../item_user_permission/item_user_permission.model.js";
+import UserPermission from "../../user_permision/user_permission.model.js"
+import { ApolloError } from "apollo-server-express"; // Đừng quên import ApolloError
 class UserCreateFactory {
   static async createUser(name, role_account, _id) {
-    const creator = UserCreateFactory.getUserCreator(role_account);
+
+    const createdUser = await creator.create({ name: name, account_id: _id });
+    const creator = UserCreateFactory.getUserCreator(role_account,createUser._id);
     if (!creator) {
       throw new Error(`Unsupported role_account: ${role_account}`);
     }
-    const createdUser = await creator.create({ name: name, account_id: _id });
     return createdUser;
   }
 
-  static getUserCreator(role_account) {
+  static getUserCreator(role_account, _id) {
     
-    if (role_account === "employee") {
-      return new EmployeeUserCreator();
-    } else if (role_account === "customer") {
-      return new CustomerUserCreator();
-    }else {
-      throw new Error(`Unsupported role_account: ${role_account}`);
+    const user_permission = UserPermission.findOne({ name: role_account});
+    if (!user_permission){
+      throw new ApolloError ("User permission not found")
     }
+    const newItemUserPermission = new UserPermission({
+      user_permission_id: user_permission._id,
+      user_id: _id
+    })
+    if(!newItemUserPermission){
+      throw new ApolloError ("User permission not new");
+    }
+    const saveItemUserPermission = newItemUserPermission;
+    if (!saveItemUserPermission ){
+      throw new ApolloError ("User permission not saved");
+    }
+
+    return saveItemUserPermission;
   }
 }
 

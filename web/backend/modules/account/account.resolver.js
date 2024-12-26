@@ -1,7 +1,6 @@
-// resolvers.js
+ // resolvers.js
 import Account, { getAccountDetails } from "./account.model.js";
-import Employee, { getEmployeeDetails } from "../employee/employee.model.js";
-import Customer, { getCustomerDetails } from "../customer/customer.model.js";
+import User, { getUserDetails } from "../user/user.model.js";
 import bcrypt from "bcrypt";
 import { ApolloError } from "apollo-server-express"; // Đừng quên import ApolloError
 import validator from "validator";
@@ -17,7 +16,9 @@ import UserCreateFactory from "./creational/user.create.factory.js"; // Import F
 import UserCheckEmail from "./behavioral/userCheckEmail.js"; // Import AccountCheckEmail to check email
 // import UserFinderFactory from "./creational/user.finder.factory.js";
 import AccountService from "./account.service.js";
-
+import { cartResolver } from "../cart/cart.resolver.js"; // Import addToCart từ cartResolver
+import UserPermission from "../user_permision/user_permission.model.js"
+import ItemUserPermission from "../item_user_permission/item_user_permission.model.js";
 
 const createToken = (email) => {
   return jwt.sign({ email }, process.env.JWT_SECRET, {
@@ -51,14 +52,14 @@ const accountResolver = {
   return account;
     },
     getAccountByToken: async (_,{token})=>{
-      const account = await AccountService.findAccountByToken(_token);
+      const account = await AccountService.findAccountByToken(token);
       return account;
     }
   },
   Mutation: {
     registerAccount: async (
       _,
-      { email, password, confirmPassword, role_account, name }
+      { email, password, confirmPassword, name }
     ) => {
       try {
         validateEmail(email);
@@ -73,6 +74,9 @@ const accountResolver = {
         validatePasswordMatch(password, confirmPassword);
         // Check if email already exists
         await UserCheckEmail.checkEmail(email);
+ 
+        const role_account = await UserCheckEmail.checkEmailCompany(email);
+        
         // Hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -80,20 +84,25 @@ const accountResolver = {
         const newAccount = await AccountService.createAccount(
           email,
           hashedPassword,
-          role_account
         );
         // Create the user (Employee or Customer)
         const createdUser = await UserCreateFactory.createUser(
           name,
-          role_account,
+
           newAccount._id
         );
-        // Link the user to the account and save
-        await AccountService.linkUserToAccount(
-          newAccount,
-          createdUser,
-          role_account
-        );
+  const checkUserPermission = await UserPermission.findOne({name: role_account})
+if (!checkUserPermission){
+  throw new ApolloError("User permission check failed");
+}else{
+  const itemUserPermission = await ItemUserPermission.create({
+    user_permission_id: checkUserPermission._id,
+    user_id: createdUser._id
+  })
+  if (!itemUserPermission){
+    throw new ApolloError("Item user permission not created");
+  }
+}
         // Return the user info
         return AccountService.getAccountResponse(
           newAccount,
@@ -106,7 +115,25 @@ const accountResolver = {
         );
       }
     },
-    async loginAccount(_, { email, password, role_account }) {
+    async addAccountEmployee(_,{email, password}){
+      const role_account = "employee";
+      const newAccount = await AccountService.createAccount(
+        email,
+        password,
+
+      );
+      const createdUser = await UserCreateFactory.createUser(
+        "Employee",
+        newAccount._id
+      );
+      await AccountService.linkUserToAccount(
+        newAccount,
+        createdUser,
+        role_account
+      );
+      return newAccount;
+    }
+    async loginAccount(_, { email, password }) {
       // Fetch the account
       const account = await AccountService.findAccountByEmail(email);
       if (!account) {
@@ -127,16 +154,15 @@ const accountResolver = {
       if (!isMatch) {
         throw new ApolloError("Incorrect password");
       }
-    
       // Role-based logic
       let user = null;
-      if (role_account === "employee") {
+      if (account.role_account === "employee") {
         user = await Employee.findOne({ account_id: account._id });
         if (!user) {
           throw new ApolloError("Employee information not found");
         }
         console.log("Employee:", user);
-      } else if (role_account === "customer") {
+      } else if (account.role_account === "customer") {
         user = await Customer.findOne({ account_id: account._id });
         if (!user) {
           throw new ApolloError("Customer information not found");

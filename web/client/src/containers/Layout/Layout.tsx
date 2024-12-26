@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {showLogin ? (
         <LoginPopup setShowLogin={setShowLogin} showLogin={showLogin} />
       ) : (
-        <div className='wrapper'>
+        <div className='wrapper-btn-translate'>
           <div className='btn-translate' id='google_translate_element'></div>
           <PromotionBarClock />
           <Navbar

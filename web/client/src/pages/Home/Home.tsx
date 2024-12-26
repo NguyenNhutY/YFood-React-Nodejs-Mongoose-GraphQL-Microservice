@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "intro.js/introjs.css"; // Import Intro.js styles
 import { homeIntroSteps } from "../../types"; // Adjust the path to your steps
 import Header from "../../components/Header/Header";
-import ExploreMenu from "../../components/ExploreMenu/ExploreMenuContainer";
+import ExploreMenu from "../../components/ExploreMenu/ExploreMenu";
 import FoodDisplay from "../../containers/FoodDisplay/FoodDisplay";
 import AppDownload from "../../components/AppDownload/AppDownload";
 import BackToTopButton from "../../components/BackToTopButton/BackToTopButton";

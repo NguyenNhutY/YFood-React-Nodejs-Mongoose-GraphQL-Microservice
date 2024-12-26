@@ -5,8 +5,10 @@ body {
   margin: 0; /* Loại bỏ margin mặc định của body */
 }
 
-.wrapper {
-  padding-top: 180px;
+.wrapper-btn-translate {
+  position:realation;
+  
+margin:150px 0px 0 30px;
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Đảm bảo chiều cao tối thiểu của wrapper bằng chiều cao của viewport */
@@ -18,9 +20,3 @@ body {
 
 /* Nếu cần tùy chỉnh thêm cho footer */
 
-.btn-translate {
-  position: absolute;
-  left: 20px;
-
-  top: -40px;
-}

@@ -14,12 +14,8 @@ const accountSchema = new mongoose.Schema(
       default: null,
     },
     password: { type: String, required: true, default: null },
-    employee_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Employee",
-      default: null,
-    },
-    customer_id: {
+
+    user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
       default: null,
@@ -33,8 +29,7 @@ const Account = mongoose.model("Account", accountSchema);
 const getAccountDetails = async (account_id) => {
   try {
     const account = await Account.findById(account_id)
-      .populate("customer_id") // Lấy dữ liệu từ Customer
-      .populate("employee_id"); // Lấy dữ liệu từ Employee
+      .populate("user_id") // Lấy dữ liệu từ Customer
 
     console.log(account);
     return account;

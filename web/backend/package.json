@@ -3,19 +3,38 @@
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
+  " workspaces":[
+    "modules/account",
+    "modules/material",
+    "modules/material_batch"
+  ],
+"scripts": {
+  "start": "nodemon server.js",
+  "start:account": "cd modules/account && nodemon index.js",
+  "start:material": "cd modules/material && nodemon index.js",
+  "start:material_batch": "cd modules/material_batch && nodemon index.js",
+  "start:food": "cd modules/food && nodemon index.js",
+  "start:cart":"cd modules/cart && nodemon index.js",
+  "start:item_material_food":"cd modules/item_material_food && nodemon index.js",
+  "start:category":"cd modules/category && nodemon index.js",
+  "start:role":"cd modules/role && nodemon index.js",
+
+  "start:services": "npm-run-all --parallel start:category start:food start:account start:material start:material_batch start:cart start:item_material_food",
+  "start:all": "npm-run-all start:services start"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/federation": "^0.38.1",
+    "@apollo/gateway": "^2.9.3",
     "@apollo/subgraph": "^2.9.3",
     "@prisma/client": "^5.19.0",
     "@types/multer": "^1.4.12",
     "amqplib": "^0.10.4",
     "apollo-server": "^3.13.0",
     "apollo-server-express": "^3.13.0",
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "bson": "^6.9.0",
@@ -26,6 +45,7 @@
     "ethers": "^6.13.2",
     "express": "^4.19.2",
     "express-graphql": "^0.12.0",
+    "express-session": "^1.18.1",
     "fs": "^0.0.1-security",
     "graphql": "^16.9.0",
     "graphql-upload": "^13.0.0",
@@ -62,8 +82,10 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.5.0",
     "@types/redis": "^4.0.10",
+    "npm-run-all": "^4.1.5",
     "prisma": "^5.19.0",
     "typescript": "^5.5.4"
   },
   "description": ""
+ 
 }

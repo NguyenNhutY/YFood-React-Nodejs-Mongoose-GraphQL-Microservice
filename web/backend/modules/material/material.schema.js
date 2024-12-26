@@ -4,10 +4,14 @@ const materialSchema = gql`
   scalar Decimal
   scalar Date
 
-  type Material {
-    id: ID!
+  type Material @key(fields: "_id"){
+    _id: ID!
     name: String!
     description: String
+  }
+      input MaterialInput {
+    name: String!
+
   }
 
   type MaterialResponse {
@@ -16,16 +20,16 @@ const materialSchema = gql`
     dataMaterial: [Material]
   }
 
-  type Query {
-    listMaterial: MaterialResponse!
+  extend type Query {
+    listMaterial: MaterialResponse
     getMaterialById(id: ID!): MaterialResponse!
     getMaterialByName(name: String!): MaterialResponse!
   }
 
-  type Mutation {
+  extend type Mutation {
   deleteMaterial(id:ID!): [MaterialResponse]!
     updateMaterial(id: ID!, name: String!, description: String!): MaterialResponse!
-    createMaterial(name: String!, description: String!): MaterialResponse!
+      createMaterial(materials: [MaterialInput]!): MaterialResponse!
   }
 `;
 

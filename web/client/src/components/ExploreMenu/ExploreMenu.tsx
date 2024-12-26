@@ -1,30 +1,27 @@
-import React from "react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
+import React, { useRef } from "react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/swiper-bundle.min.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import "./exploreMenu.css";
-import { fromJS, List } from "immutable"; // Import from immutable
-import { menu_list } from "../../assets/frontend_assets/assets";
-import "./swiper.css";
+import "./exploreMenu.scss";
+import { gql, useQuery } from "@apollo/client";
 
-// Type for menu item
-interface MenuItem {
-  _id?: string;
-  menu_name: string;
-  menu_image: string;
-}
+// GraphQL query
+const CATEGORY_QUERY = gql`
+  query {
+    listCategory {
+      success
+      message
+      datas {
+        _id
+        name
+        image
+      }
+    }
+  }
+`;
 
 // Define props interface
 interface ExploreMenuProps {
@@ -33,8 +30,27 @@ interface ExploreMenuProps {
 }
 
 const ExploreMenu: React.FC<ExploreMenuProps> = ({ category, setCategory }) => {
-  // Convert menu_list to Immutable List with typed data
-  const immutableMenuList: List<MenuItem> = fromJS(menu_list);
+  const swiperRef = useRef<any>(null);
+  const { data, loading, error } = useQuery(CATEGORY_QUERY);
+
+  const goNext = () => {
+    swiperRef.current.swiper.slideNext();
+  };
+
+  const goPrev = () => {
+    swiperRef.current.swiper.slidePrev();
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  // Sử dụng mảng thông thường để lưu danh sách danh mục
+  const categories = data.listCategory.datas;
+
+  // Kiểm tra xem có danh mục nào không
+  if (!categories || categories.length === 0) {
+    return <p>No categories available.</p>;
+  }
 
   return (
     <div className='explore-menu' id='explore-menu'>
@@ -43,42 +59,41 @@ const ExploreMenu: React.FC<ExploreMenuProps> = ({ category, setCategory }) => {
         Discover our diverse menu featuring a delectable array of dishes crafted
         with the finest ingredients.
       </p>
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={20}
-        slidesPerView={4}
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        navigation
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        onSwiper={(swiper) => console.log("Swiper initialized:", swiper)}
-        onSlideChange={() => console.log("Slide changed")}
-        className='explore-menu-list my-swiper'
-      >
-        {immutableMenuList.map((item, index) => (
-          <SwiperSlide
-            key={item.get("_id") || index} // Use item.get('_id') if available, fallback to index
-            className='explore-menu-list-item'
-            onClick={() =>
-              setCategory((prev) =>
-                prev === item.get("menu_name") ? "All" : item.get("menu_name")
-              )
-            }
-            aria-label={`Category ${item.get("menu_name")}`} // Accessibility improvement
-          >
-            <img
-              className={category === item.get("menu_name") ? "active" : ""}
-              src={item.get("menu_image")}
-              alt={item.get("menu_name")}
-              loading='lazy'
-            />
-            <p>{item.get("menu_name")}</p>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="swiper-container">
+        <button onClick={goPrev} className="swiper-button-prev"> &#8612; </button>
+        <Swiper
+          ref={swiperRef}
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          spaceBetween={20}
+          slidesPerView={4}
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          navigation
+          className='explore-menu-list my-swiper'
+        >
+          {categories.map((item: any) => (
+            <SwiperSlide
+              key={item._id}
+              className='explore-menu-list-item'
+              onClick={() =>
+                setCategory((prev) =>
+                  prev === item._id ? "All" : item._id
+                )
+              }
+              aria-label={`Category ${item._id}`}
+            >
+              <img
+                className={category === item._id ? "active" : ""}
+                src={item.image}
+                alt={item.name}
+                loading='lazy'
+              />
+              <p>{item.name}</p>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button onClick={goNext} className="swiper-button-next"> &#8614;  </button>
+      </div>
       <hr />
     </div>
   );

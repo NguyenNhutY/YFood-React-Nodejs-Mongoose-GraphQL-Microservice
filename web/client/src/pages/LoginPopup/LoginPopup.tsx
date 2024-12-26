@@ -12,20 +12,43 @@ import IntroTourButton from "../../components/IntroBtn/IntroBtn";
 import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+
+
 const LOGIN_MUTATION = gql`
   mutation loginAccount(
     $email: String!
     $password: String!
-    $isEmployee: Boolean!
   ) {
-    loginAccount(email: $email, password: $password, isEmployee: $isEmployee) {
+    loginAccount(email: $email, password: $password) {
       token
+    dataUser{
       name
+    }
+      success
+      dataAccount{
       email
-      isEmployee
+      }
     }
   }
 `;
+
+const RESGITER_MULATION = gql`
+  mutation registerAccount(
+    $name: String!
+    $email: String!
+    $password: String!
+    $confirmPassword:String!
+  ) {
+    registerAccount(name: $name, email: $email, password: $password,confirmPassword:$confirmPassword ) {
+      success
+      message
+      dataAccount{
+        email
+      }
+        dataUser{
+        name}
+    }
+  }`
 interface LoginPopupProps {
   showLogin: boolean;
   setShowLogin: (show: boolean) => void; // Fixed prop name here
@@ -36,6 +59,7 @@ interface FormValues {
   email: string;
   password: string;
   terms: boolean;
+  confirmPassword:string;
 }
 
 const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
@@ -47,35 +71,78 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
   const [showPasswordGenerator, setShowPasswordGenerator] = useState<boolean>(
     false
   );
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
-  const [loginError, setLoginError] = useState<string | null>(null);
+  const [register] = useMutation(RESGITER_MULATION);
 
+  const [login] = useMutation(LOGIN_MUTATION);
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [registerError, setRegisterError] = useState<string | null>(null);
+
+  useEffect(() => {
+    console.log('currState', currState);
+  }, [currState])
+  
   const handleSubmit = (
     values: FormValues,
     actions: FormikHelpers<FormValues>
   ) => {
-    login({
-      variables: {
-        email: values.email,
-        password: values.password,
-        isEmployee: false,
-      }, // Can be dynamically set based on login state
-    })
-      .then((response) => {
-        const { name, token } = response.data.loginAccount;
-        console.log({ token, name });
-        authContext?.login(name); // Assuming authContext has login method to set token
-        setShowLogin(false); // Close login popup
+    if (currState === "Login") {
+      // Xử lý đăng nhập
+      login({
+        variables: {
+          email: values.email,
+          password: values.password,
+          
+        },
       })
-      .catch((err) => {
-        console.error("Login error:", err);
-        setLoginError("Incorrect email or password."); // Set the error message
+        .then((response) => {
+          const { loginAccount } = response.data;
+          if (loginAccount && loginAccount.success) {
+            const { name } = loginAccount.dataUser[0];
+            const token = loginAccount.token;
+            const sucess = loginAccount.success;
+            authContext?.login(name);
+            console.log(token);
+            console.log(name);
+            console.log(sucess)
+            setShowLogin(false); // Đóng popup login
+          }
+        })
+        .catch((err) => {
+          console.error("Login error:", err);
+          setLoginError("Incorrect email or password.");
+          actions.setSubmitting(false);
+        });
+    } else if (currState === "Sign Up") {
+      // Xử lý đăng ký
+      register({
+        variables: {
+          email: values.email,
+          password: values.password,
+          name: values.name,
+          confirmPassword: values.confirmPassword
+        },
+      })
+        .then((response) => {
+          const { registerAccount } = response.data;
 
-        actions.setSubmitting(false);
-      });
+         if (registerAccount.success){
+   
+
+          setCurrState("Login"); // Đóng popup login
+         }
+         const sucess = registerAccount.success;
+         console.log(sucess)
+          
+          
+        })
+        .catch((err) => {
+          console.error("Register error:", err);
+          setRegisterError("Email already exists")
+        });
+    }
   };
+  
 
-  const navigate = useNavigate(); // Dùng để chuyển hướng sau khi login thành công
 
   const [passwordValidation, setPasswordValidation] = useState({
     minLength: false,
@@ -118,14 +185,13 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
   }, []);
 
   const validationSchema = Yup.object({
-    name:
-      currState === "Sign Up"
-        ? Yup.string().required("*")
-        : Yup.string().notRequired(),
+    name: currState === "Sign Up" ? Yup.string().required("*") : Yup.string().notRequired(),
+
     email: Yup.string()
       .email("Invalid email format")
       .required("*"),
     password: Yup.string().required("*"),
+    confirmPassword: currState === "Sign Up" ? Yup.string().oneOf([Yup.ref('password'), null], "Passwords must match").required("*") : Yup.string().notRequired(),
     terms:
       currState === "Sign Up"
         ? Yup.boolean().oneOf([true], "*")
@@ -136,7 +202,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
   return (
     <div className='login-popup' onClick={handleOverlayClick}>
       <Formik
-        initialValues={{ name: "", email: "", password: "", terms: false }}
+        initialValues={{ name: "", email: "", password: "", terms: false,confirmPassword:"" }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
@@ -156,7 +222,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
               data-step='1'
               data-intro='Fill in your login details here.'
             >
-              {currState === "Login" ? null : (
+              {currState === "Sign Up" &&(
                 <div>
                   <label htmlFor='name-input' className='name-label label'>
                     Name
@@ -198,6 +264,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
                   id='password-input'
                   placeholder='Your password'
                   as={SecurityInput}
+                    autocomplete="current-password"
                   onChange={(e:any) => {
                     const value = e.target.value;
                     setFieldValue("password", value);
@@ -210,11 +277,45 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
                   component='div'
                   className='error'
                 />
-                {loginError && (
+                 
+       
+               
+                {loginError && currState ==="Login" && (
                   <div className='error-message'>{loginError}</div>
                 )}
+{currState === "Sign Up"&&(<div>
+<label
+                  htmlFor='confirmPassword-input'
+                  className='confirmPassword-label label'
+                >
+                  Confirm Password
+                </label>
+                <Field
+                  className='input-login'
+                  type='password'
+                  name='confirmPassword'
+                  id='confirmPassword-input'
+                  placeholder='Your Confirm Password'
+                  as={SecurityInput}  
+                
 
+                  onChange={(e:any) => {
+                    const value = e.target.value;
+                    setFieldValue("confirmPassword", value);
+                 }}
+                />
+                <ErrorMessage
+                  name='confirmPassword'
+                  component='div'
+                  className='error'
+                />
+</div>)}
+{registerError && currState === "Sign Up" && (
+                  <div className='error-message'>{registerError}</div>
+                )}
                 {showPasswordCriteria && currState === "Sign Up" && (
+
+
                   <div className='password-criteria'>
                     <div className='criteria-row'>
                       <div
@@ -347,7 +448,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ showLogin, setShowLogin }) => {
       {showModalPolicy && (
         <ModalPolicy onClose={() => setShowModalPolicy(false)} />
       )}
-      {showPasswordGenerator && (
+      {showPasswordGenerator && ( 
         <PassGenerator
           onPasswordGenerated={(password: string) => {
 

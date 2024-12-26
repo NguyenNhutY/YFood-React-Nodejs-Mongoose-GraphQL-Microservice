@@ -69,6 +69,7 @@
   }
 }
 
+
 .tag {
   display: flex;
   align-items: center;
@@ -80,4 +81,37 @@
   padding: 0.7rem 1rem;
   margin-right: 1rem;
   cursor: pointer;
+}
+.swiper-button-prev,
+.swiper-button-next {
+
+  display: flex; /* Đảm bảo nội dung nằm giữa */
+  justify-content: center; /* Căn giữa */
+  align-items: center; /* Căn giữa */
+  position: absolute; /* Vị trí tuyệt đối để đặt nút lên trên slide */
+  top: 50%; /* Đặt nút ở giữa chiều dọc */
+  transform: translateY(-50%); /* Căn giữa chính xác */
+  z-index: 10; /* Đảm bảo nút nằm trên các phần tử khác */
+  border: none; /* Không có viền */
+  cursor: pointer; /* Con trỏ chuột dạng tay */
+  color: tomato;
+
+}
+
+.swiper-button-prev {
+  left: 10px; /* Cách từ bên trái */
+}
+
+.swiper-button-next {
+  right: 10px; /* Cách từ bên phải */
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

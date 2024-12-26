@@ -6,6 +6,8 @@ import { ApolloServer } from "apollo-server-express";
 import materialSchema from './material.schema.js';  // Import material schema
 import materialResolver from "./material.resolver.js"; // Material batch resolvers
 import {buildSubgraphSchema} from "@apollo/subgraph"
+import { ApolloServerPluginInlineTraceDisabled } from 'apollo-server-core';
+
 const app = express();
 const PORT = process.env.PORT || 4003;
 
@@ -26,7 +28,9 @@ const server = new ApolloServer({
   introspection: true, // Giữ introspection để có thể truy vấn schema từ localhost
   playground: true,    // Bật GraphQL Playground ở localhost
   tracing: false,      // Tắt Apollo Studio tracing 
-  name: "material",
+  name: "material",  plugins: [
+    ApolloServerPluginInlineTraceDisabled(),
+  ],
   formatError: (error) => {
     console.error(error); // Log errors for debugging
     return error;

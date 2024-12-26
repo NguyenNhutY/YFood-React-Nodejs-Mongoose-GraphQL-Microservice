@@ -28,6 +28,22 @@ const gateway = new ApolloGateway({
       {
         name: 'material',
         url: 'http://localhost:4003/graphql',
+      },   
+         {
+        name: 'food',
+        url: 'http://localhost:4004/graphql',
+      },
+      {
+        name: 'cart',
+        url: 'http://localhost:4007/graphql',
+      },
+      {
+        name: 'item_material_food',
+        url: 'http://localhost:4006/graphql',
+      },
+      {
+        name: 'category',
+        url: 'http://localhost:4005/graphql',
       }
     ],
     introspection: true, // Giữ introspection để có thể truy vấn schema từ localhost

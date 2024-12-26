@@ -1,0 +1,249 @@
+{
+    "materials": [{
+      "name": "Cucumber",
+    },
+    {
+      "name": "Tomato",
+    },  {
+      "name": "Lettuce",
+    },  {
+      "name": "Feta Cheese",
+    },  {
+      "name": "Caschew",
+    },  {
+      "name": "Asparagus",
+    },  {
+      "name": "Olive Oil",
+    },  {
+      "name": "Milk",
+    },  {
+      "name": "Cream",
+    },  {
+      "name": "Mustard Green",
+    },  {
+      "name": "Basil",
+    },  {
+      "name": "Apple",
+    },  {
+      "name": "Berrie",
+    },  {
+      "name": "Nut",
+    },  {
+      "name": "Kale",
+    },   {
+      "name": "Egg",
+    },  {
+      "name": "Lasagna Noodle",
+    },  {
+      "name": "Italian Pasta",
+    },  {
+      "name": "Mozzarella Chesse",
+    },  {
+      "name": "Pepper",
+    },  {
+      "name": "Salt",
+    }, {
+      "name": "Chili",
+    }, {
+      "name": "Meat",
+    }, {
+      "name": "Chesse",
+    }, {
+      "name": "Peri Peri Chili",
+    }, {
+      "name": "Cabbage",
+    }, {
+      "name": "Mayonnaise",
+    }, {
+      "name": "Peanut",
+    }, {
+      "name": "Ice Cream",
+    }, {
+      "name": "Strawberry",
+    }, {
+      "name": "Grren Lemo",
+    }, {
+      "name": "Yellow Lemo",
+    }, {
+      "name": "Lemo",
+    }, {
+      "name": "Orange",
+    }, {
+      "name": "Vania",
+    }, {
+      "name": "Chocolate",
+    }, {
+      "name": "Sugar",
+    }, {
+      "name": "Cane Sugar",
+    }, {
+      "name": "Sheep Milk",
+    }, {
+      "name": "Pure Milk",
+    }, {
+      "name": "Sandwich",
+    }, {
+      "name": "Bread Sandwich",
+    }, {
+      "name": "Onion Sauce",
+    }, {
+      "name": "Goat Milk",
+    }, {
+      "name": "Rice",
+    }, {
+      "name": "Broccoli",
+    }, {
+      "name": "White Radish",
+    }, {
+      "name": "Sage",
+    }, 
+      {
+      "name": "Mushroom",
+    },{
+      "name": "Oyster Mushroom",
+    },{
+      "name": "Agaricus Mushroom",
+    },{
+      "name": "Wheat Flour ",
+    },{
+      "name": "Condensed Milk",
+    },{
+      "name": "Caramel",
+    },{
+      "name": "Buttercotch",
+    },{
+      "name": "Somen Noodle",
+    },{
+      "name": "Soy Sauce",
+    },{
+      "name": "Japanese Spices",
+    },{
+      "name": "Green Onion",
+    },{
+      "name": "Spaghetti",
+    },{
+      "name": "Carrot",
+    },{
+      "name": "Chinese Cabbage",
+    },{
+      "name": "Seasame Oil",
+    },{
+      "name": "Cream Sauce",
+    },
+    {
+      "name":"Coriander"
+    },  {
+      "name":"Banana"
+    } , {
+      "name":"Butter"
+    } , {
+      "name":"Corn"
+    } , {
+      "name":"Coffee"
+    } , {
+      "name":"Fish"
+    }, {
+      "name":"Flour"
+    }, {
+      "name":"Honey"
+    }, {
+      "name":"Lamb"
+    }, {
+      "name":"Pork"
+    }, {
+      "name":"Shrimp"
+    }, {
+      "name":"Spinach"
+    }, {
+      "name":"Tea"
+    }, {
+      "name":"Tuna"
+    }, {
+      "name":"Vinegar"
+    }, {
+      "name":"Watermelon"
+    }, {
+      "name":"Yogurt"
+    }, {
+      "name":"Zucchini"
+    }, {
+      "name":"Almond"
+    }, {
+      "name":"Beef"
+    }, {
+      "name":"Beetroot"
+    }, {
+      "name":"Celery"
+    }, {
+      "name":"Cinnamon"
+    }, {
+      "name":"Coconut"
+    }, {
+      "name":"Curry"
+    }, {
+      "name":"Dill"
+    }, {
+      "name":"Ginger"
+    }, {
+      "name":"Grape"
+    }, {
+      "name":"Ham"
+    }, {
+      "name":"Kiwi"
+    }, {
+      "name":"Mango"
+    }, {
+      "name":"Mint"
+    }, {
+      "name":"Oats"
+    }, {
+      "name":"Olive"
+    }, {
+      "name":"Papaya"
+    }, {
+      "name":"Parsley"
+    }, {
+      "name":"Peach"
+    }, {
+      "name":"Pear"
+    }, {
+      "name":"Peas"
+    }, {
+      "name":"Pineapple"
+    }, {
+      "name":"Plum"
+    }, {
+      "name":"Pumpkin"
+    }, {
+      "name":"Quinoa"
+    }, {
+      "name":"Raisin"
+    }, {
+      "name":"Raspberry"
+    }, {
+      "name":"Rosemary"
+    }, {
+      "name":"Sweet potato"
+    }, {
+      "name":"Sesame"
+    }, {
+      "name":"Thyme"
+    }, {
+      "name":"Tofu"
+    }, {
+      "name":"Turkey"
+    }, {
+      "name":"Walnut"
+    }, {
+      "name":"Cilantro"
+    }, {
+      "name":"Paprika"
+    }, {
+      "name":"Parsnip"
+    }, {
+      "name":"Turmeric"
+    }, {
+      "name":"Fish Sauce"
+    }
+    ]
+  }

@@ -1,0 +1,111 @@
+[{
+  "_id": {
+    "$oid": "67431ab5c9d25b3677242d5b"
+  },
+  "name": "Salad",
+  "createdAt": {
+    "$date": "2024-11-24T12:23:17.334Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-24T12:23:17.334Z"
+  },
+  "image":"https://res.cloudinary.com/dmdqqaiv5/image/upload/v1732984524/pvtrg55eouzms39cl8uy.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67431ab5c9d25b3677242d63"
+  },
+  "name": "Deserts",
+  "createdAt": {
+    "$date": "2024-11-24T12:23:17.441Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-24T12:23:17.441Z"
+  },
+  "image":"https://res.cloudinary.com/dmdqqaiv5/image/upload/v1732984524/vygqytui5xlbxrpcevkw.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67431ab5c9d25b3677242d61"
+  },
+  "name": "Rolls",
+  "createdAt": {
+    "$date": "2024-11-24T12:23:17.375Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-24T12:23:17.375Z"
+  },
+  "image":"https://res.cloudinary.com/dmdqqaiv5/image/upload/v1732984522/ypomt9fp9gu9h8mizavc.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67431ab5c9d25b3677242d6f"
+  },
+  "name": "Sandwich",
+  "createdAt": {
+    "$date": "2024-11-24T12:23:17.568Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-24T12:23:17.568Z"
+  },
+  "image":"https://res.cloudinary.com/dmdqqaiv5/image/upload/v1732984524/vygqytui5xlbxrpcevkw.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67431ab5c9d25b3677242d77"
+  },
+  "name": "Cake",
+  "createdAt": {
+    "$date": "2024-11-24T12:23:17.635Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-24T12:23:17.635Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67431ab5c9d25b3677242d7f"
+  },
+  "name": "Pure Veg",
+  "createdAt": {
+    "$date": "2024-11-24T12:23:17.717Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-24T12:23:17.717Z"
+  },
+  "image":"https://res.cloudinary.com/dmdqqaiv5/image/upload/v1732984529/abime2dph1xnkkrs4uf7.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67431ab5c9d25b3677242d87"
+  },
+  "name": "Pasta",
+  "createdAt": {
+    "$date": "2024-11-24T12:23:17.783Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-24T12:23:17.783Z"
+  },
+  "image":"https://res.cloudinary.com/dmdqqaiv5/image/upload/v1732984531/eed1yx8ekf26yuderad4.png",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67431ab5c9d25b3677242d91"
+  },
+  "name": "Noodles",
+  "createdAt": {
+    "$date": "2024-11-24T12:23:17.867Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-24T12:23:17.867Z"
+  },
+  "image":"https://res.cloudinary.com/dmdqqaiv5/image/upload/v1732984533/op5zvndjqpjdclrn0ruh.png",
+  "__v": 0
+}]

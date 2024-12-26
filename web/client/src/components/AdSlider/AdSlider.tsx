@@ -19,7 +19,7 @@ const AdSlider: React.FC<AdSliderProps> = () => {
   // Define Swiper configuration strategy
   const swiperConfig = {
     modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
-    slidesPerView: 3,
+    slidesPerView: 4,
     pagination: { clickable: true },
     scrollbar: { draggable: true },
     navigation: true,
@@ -31,7 +31,8 @@ const AdSlider: React.FC<AdSliderProps> = () => {
     onSlideChange: () => console.log("Slide changed"),
   };
 
-  return (
+  return (    <div className='ad-slider-swagger' >
+
     <div className='ad-slider' id='ad-slider'>
       <Swiper {...swiperConfig} className='ad-slider-list'>
         {imageList.map((item: any) => (
@@ -46,7 +47,8 @@ const AdSlider: React.FC<AdSliderProps> = () => {
         ))}
       </Swiper>
       <hr />
-    </div>
+    </div>    </div>
+
   );
 };
 

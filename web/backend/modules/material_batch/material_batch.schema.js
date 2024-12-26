@@ -33,6 +33,7 @@ type MaterialBatch @key(fields: "_id") {
 }
 
 input MaterialBatchInput {
+
   material_id: ID!
   batch_code: String!
   harvest_date: Date!
